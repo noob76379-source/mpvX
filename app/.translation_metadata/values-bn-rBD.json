@@ -1287,34 +1287,6 @@
     "source_hash": "7b06e0160857f939dc67543aa6b732b08a7df5426d18a5bda423c10c17d91258",
     "translated_value": "UPI"
   },
-  "pref_about_telegram_title": {
-    "source_hash": "acdd1e734125f341604c0efbabdcc4c4b0597e8f6235d66c2445edd1812838c1",
-    "translated_value": "টেলিগ্রাম"
-  },
-  "pref_about_telegram_channel": {
-    "source_hash": "91f73f4ab812f8522527527c6ed88fd132339efcd85b049e7813c83ee6e85e21",
-    "translated_value": "টেলিগ্রাম চ্যানেল"
-  },
-  "pref_about_telegram_channel_summary": {
-    "source_hash": "030e21f2e3a202063115c3ba7ddab4170044da1f4036042635eb0e0e8f6c7afd",
-    "translated_value": "আপডেট এবং খবরের জন্য আমাদের চ্যানেলে যোগ দিন"
-  },
-  "pref_about_telegram_group": {
-    "source_hash": "475c139925e37b96cd08daf0f688e376dc6264101d7493b5cbf59270ade9ba27",
-    "translated_value": "টেলিগ্রাম চ্যাট গ্রুপ"
-  },
-  "pref_about_telegram_group_summary": {
-    "source_hash": "a3d28a1aeba4e955c2ff2f6b5f5fd9576a0910a08d023b04bfdd30ce15a08cae",
-    "translated_value": "কমিউনিটির সাথে আলোচনা করুন এবং চ্যাট করুন"
-  },
-  "pref_about_show_community_icon_title": {
-    "source_hash": "17e92b2e17aabb0caf014acdc98aa53a11daa095cc39a15b25b8be381ba0f06b",
-    "translated_value": "কমিউনিটি শর্টকাট"
-  },
-  "pref_about_show_community_icon_summary": {
-    "source_hash": "2551d19a23759c9ed381c149bbc87030e70f00ac65819fadb5ba9d3e3247cde7",
-    "translated_value": "হোম হেডারে কমিউনিটি লিঙ্ক শর্টকাট দেখান"
-  },
   "player_sheets_add_ext_sub": {
     "source_hash": "ce4c8004fdd4008a9c8e0639558134195b40fee1f7a91d8d9330b500be4e42d0",
     "translated_value": "বাহ্যিক সাবটাইটেল যোগ করুন"

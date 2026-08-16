@@ -1,6 +1,6 @@
-# Testing & Quality Assurance Roadmap — mpvRex
+# Testing & Quality Assurance Roadmap — mpvX
 
-This document outlines the phased roadmap for integrating an automated testing, code quality, and QA gauntlet into **mpvRex**, following modern Android best practices and software engineering principles.
+This document outlines the phased roadmap for integrating an automated testing, code quality, and QA gauntlet into **mpvX**, following modern Android best practices and software engineering principles.
 
 ---
 

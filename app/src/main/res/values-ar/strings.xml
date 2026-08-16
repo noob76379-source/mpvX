@@ -14,7 +14,7 @@
     <string name="pref_appearance_category_bottom_nav">تبويبات شريط التنقل السفلي</string>
     <string name="pref_appearance_tab_home_title">الرئيسية / الملفات</string>
     <string name="pref_appearance_tab_home_summary">عرض المجلدات المحلية ومستعرض الملفات</string>
-    <string name="pref_appearance_tab_shorts_title">RexShorts</string>
+    <string name="pref_appearance_tab_shorts_title">XShorts</string>
     <string name="pref_appearance_tab_shorts_summary">تبديل تدفقات الفيديو الرأسي السريعة</string>
     <string name="pref_appearance_tab_recents_title">المشغَّل مؤخراً</string>
     <string name="pref_appearance_tab_recents_summary">استئناف جلسات الفيديو السابقة بسرعة</string>
@@ -355,13 +355,6 @@
     <string name="pref_about_donate_paypal_summary">ادعم المطوِّر على PayPal</string>
     <string name="pref_about_donate_upi">UPI</string>
 
-    <string name="pref_about_telegram_title">تيليغرام</string>
-    <string name="pref_about_telegram_channel">قناة تيليغرام</string>
-    <string name="pref_about_telegram_channel_summary">انضم إلى قناتنا للتحديثات والأخبار</string>
-    <string name="pref_about_telegram_group">مجموعة دردشة تيليغرام</string>
-    <string name="pref_about_telegram_group_summary">ناقش وتحدث مع المجتمع</string>
-    <string name="pref_about_show_community_icon_title">اختصار المجتمع</string>
-    <string name="pref_about_show_community_icon_summary">إظهار اختصار روابط المجتمع في رأس الصفحة الرئيسية</string>
 
     <string name="player_sheets_add_ext_sub">إضافة ترجمات خارجية</string>
     <string name="player_sheets_add_ext_audio">إضافة مسارات صوتية خارجية</string>
@@ -804,9 +797,6 @@
     <string name="folders_count">المجلدات (%1$d)</string>
     <string name="media_count">الوسائط (%1$d)</string>
     <string name="drag_to_reorder">اسحب لإعادة الترتيب</string>
-    <string name="community_links">روابط المجتمع</string>
-    <string name="community_hub">مركز المجتمع</string>
-    <string name="connect_social_media">تواصل معنا على وسائل التواصل الاجتماعي</string>
     <string name="sort_and_view_options">خيارات الفرز والعرض</string>
     <string name="view_options">خيارات العرض</string>
     <string name="pref_category_ui_appearance">الواجهة والمظهر</string>
@@ -814,7 +804,7 @@
     <string name="pref_category_file_management">إدارة الملفات</string>
     <string name="pref_category_media_settings">إعدادات الوسائط</string>
     <string name="pref_category_rexshorts">ريكس شورتس</string>
-    <string name="pref_category_rexshorts_settings">إعدادات RexShorts</string>
+    <string name="pref_category_rexshorts_settings">إعدادات XShorts</string>
     <string name="pref_category_rexshorts_settings_desc">إدارة التفعيل والتعطيل والتشغيل العشوائي والمحتوى المحجوب</string>
     <string name="pref_category_advanced_about">المتقدمة وحول التطبيق</string>
     <string name="pref_enable_rexshorts">تفعيل ريكس شورتس</string>
@@ -890,18 +880,18 @@
     <string name="allow_access">السماح بالوصول</string>
     <string name="why_do_i_see_this">لماذا أرى هذا؟</string>
     <string name="why_this_permission_is_needed">لماذا هذا الإذن مطلوب</string>
-    <string name="permission_explanation_playstore_intro">يحتاج mpvRex إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط.</string>
+    <string name="permission_explanation_playstore_intro">يحتاج mpvX إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط.</string>
     <string name="permission_used_exclusively_for">يُستخدم هذا الإذن حصرياً من أجل:</string>
     <string name="permission_usage_bullet_list">• اكتشاف وعرض ملفات الفيديو الخاصة بك\n• تشغيل المحتوى الإعلامي\n• تحميل ملفات الترجمة</string>
-    <string name="permission_explanation_standard_intro">يتطلب mpvRex دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام.</string>
+    <string name="permission_explanation_standard_intro">يتطلب mpvX دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام.</string>
     <string name="permission_security_policy_change">مع ذلك، بسبب تغيير في سياسة الأمان، تتطلب التطبيقات المبنية لأندرويد 11 وما فوق الآن إذناً إضافياً لمواصلة الوصول لنفس الملفات.</string>
     <string name="permission_privacy_assurance_standard">يرجى العلم أن هذا الإذن يُستخدم فقط للاكتشاف التلقائي لملفات الوسائط/الترجمة على جهازك، ولن يسمح لنا بالوصول لملفات البيانات الخاصة المخزنة من طرف تطبيقات أخرى بأي شكل من الأشكال.</string>
-    <string name="opensource_github_notice">mpvRex مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:</string>
+    <string name="opensource_github_notice">mpvX مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:</string>
     <string name="privacy_assurance_final">كن مطمئناً، خصوصيتك هي أولويتنا القصوى، ولا نصل لملفاتك لأغراض أخرى ولا ننقلها أو نخزنها في خوادمنا. تبقى آمنة على جهازك.</string>
     
-    <string name="permission_required_photos_videos">يحتاج mpvRex إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها.</string>
-    <string name="permission_required_storage">يحتاج mpvRex إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها.</string>
-    <string name="permission_required_all_files">يحتاج mpvRex إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث.</string>
+    <string name="permission_required_photos_videos">يحتاج mpvX إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها.</string>
+    <string name="permission_required_storage">يحتاج mpvX إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها.</string>
+    <string name="permission_required_all_files">يحتاج mpvX إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث.</string>
     <string name="permission_explanation_tiramisu_plus">في أندرويد 13 وما فوق، يسمح هذا الإذن للتطبيق بقراءة ملفات الفيديو من تخزين جهازك، بما في ذلك مجلدات التنزيلات والأفلام و DCIM.</string>
     <string name="permission_explanation_pre_tiramisu">يسمح هذا الإذن للتطبيق بقراءة ملفات الوسائط من تخزين جهازك لتشغيل الفيديوهات والصوتيات.</string>
 

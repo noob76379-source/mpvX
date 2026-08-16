@@ -49,7 +49,7 @@
   },
   "pref_appearance_tab_shorts_title": {
     "source_hash": "f7b29b8a857ac6fc832abfcb836146d602469ff97cd7a44843b4f18cc3f1c2a5",
-    "translated_value": "RexShorts"
+    "translated_value": "XShorts"
   },
   "pref_appearance_tab_shorts_summary": {
     "source_hash": "9d4d8335dad31905a305f046be458d5fd7124ab79096f2bf159e40450ce87fe1",
@@ -1286,34 +1286,6 @@
   "pref_about_donate_upi": {
     "source_hash": "7b06e0160857f939dc67543aa6b732b08a7df5426d18a5bda423c10c17d91258",
     "translated_value": "UPI"
-  },
-  "pref_about_telegram_title": {
-    "source_hash": "acdd1e734125f341604c0efbabdcc4c4b0597e8f6235d66c2445edd1812838c1",
-    "translated_value": "تيليغرام"
-  },
-  "pref_about_telegram_channel": {
-    "source_hash": "91f73f4ab812f8522527527c6ed88fd132339efcd85b049e7813c83ee6e85e21",
-    "translated_value": "قناة تيليغرام"
-  },
-  "pref_about_telegram_channel_summary": {
-    "source_hash": "030e21f2e3a202063115c3ba7ddab4170044da1f4036042635eb0e0e8f6c7afd",
-    "translated_value": "انضم إلى قناتنا للتحديثات والأخبار"
-  },
-  "pref_about_telegram_group": {
-    "source_hash": "475c139925e37b96cd08daf0f688e376dc6264101d7493b5cbf59270ade9ba27",
-    "translated_value": "مجموعة دردشة تيليغرام"
-  },
-  "pref_about_telegram_group_summary": {
-    "source_hash": "a3d28a1aeba4e955c2ff2f6b5f5fd9576a0910a08d023b04bfdd30ce15a08cae",
-    "translated_value": "ناقش وتحدث مع المجتمع"
-  },
-  "pref_about_show_community_icon_title": {
-    "source_hash": "17e92b2e17aabb0caf014acdc98aa53a11daa095cc39a15b25b8be381ba0f06b",
-    "translated_value": "اختصار المجتمع"
-  },
-  "pref_about_show_community_icon_summary": {
-    "source_hash": "2551d19a23759c9ed381c149bbc87030e70f00ac65819fadb5ba9d3e3247cde7",
-    "translated_value": "إظهار اختصار روابط المجتمع في رأس الصفحة الرئيسية"
   },
   "player_sheets_add_ext_sub": {
     "source_hash": "ce4c8004fdd4008a9c8e0639558134195b40fee1f7a91d8d9330b500be4e42d0",
@@ -2907,18 +2879,6 @@
     "source_hash": "ef86a0ed928794a4be6a964201fac2fb1d57e1836b14e307e6376ba36ad7a29a",
     "translated_value": "اسحب لإعادة الترتيب"
   },
-  "community_links": {
-    "source_hash": "c03ae0d9f673b00fa6cc75d7145e826ad778ccc1a98a844b6ce6c8ba74cceba5",
-    "translated_value": "روابط المجتمع"
-  },
-  "community_hub": {
-    "source_hash": "27039d3dc5a712cf154597ed8e03d388ddc374e7d03c64c8c15be4f8b20fb84d",
-    "translated_value": "مركز المجتمع"
-  },
-  "connect_social_media": {
-    "source_hash": "9d239de7b0ed7de60244a5961db1d76c7491179ddb1d623a48f639b6bd0c70b8",
-    "translated_value": "تواصل معنا على وسائل التواصل الاجتماعي"
-  },
   "sort_and_view_options": {
     "source_hash": "4b3f780068d25f6e7a5c408cb1592655605c244fed58105a87493caf0d71ebf0",
     "translated_value": "خيارات الفرز والعرض"
@@ -2949,7 +2909,7 @@
   },
   "pref_category_rexshorts_settings": {
     "source_hash": "4ffd056902fddd7800abcd9a677af1c2217b3e188852f5f7fa32e16e615f57a6",
-    "translated_value": "إعدادات RexShorts"
+    "translated_value": "إعدادات XShorts"
   },
   "pref_category_rexshorts_settings_desc": {
     "source_hash": "9d9c806a716f2fa5dad79b42b5b52c259d0179a4a2c990e6e349a11e2cc483ce",
@@ -3233,7 +3193,7 @@
   },
   "permission_explanation_playstore_intro": {
     "source_hash": "7c58da3afdee9176c232d32f8820dad935e3491384934dfd4f8d1f87a0967a8c",
-    "translated_value": "يحتاج mpvRex إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط."
+    "translated_value": "يحتاج mpvX إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط."
   },
   "permission_used_exclusively_for": {
     "source_hash": "6ed4e23643e43257622b531cb481838c21b6569b17ffce10bd869b2e28d5503f",
@@ -3245,7 +3205,7 @@
   },
   "permission_explanation_standard_intro": {
     "source_hash": "b3984644043ddf9ee0874be53633a2deba9894802268407b9d62a664de32f86e",
-    "translated_value": "يتطلب mpvRex دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام."
+    "translated_value": "يتطلب mpvX دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام."
   },
   "permission_security_policy_change": {
     "source_hash": "e75ddded5ead1b18d34976c5d562bf8a049bb1655140974b64fcdc9df7d7a7a8",
@@ -3257,7 +3217,7 @@
   },
   "opensource_github_notice": {
     "source_hash": "33b54a5eb9477bcf424e306dab1ef42970b4ce83bc38c015b71e233466ebb507",
-    "translated_value": "mpvRex مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:"
+    "translated_value": "mpvX مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:"
   },
   "privacy_assurance_final": {
     "source_hash": "6526f0743b4a35b0f23d3ecc9cadf55eaa290512bbd8dfa0c4dbecf11bba6035",
@@ -3265,15 +3225,15 @@
   },
   "permission_required_photos_videos": {
     "source_hash": "c52cca55c3667c09dcdf418ebc3f73c550080308f87ebc5eedbb3a487a92726a",
-    "translated_value": "يحتاج mpvRex إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها."
+    "translated_value": "يحتاج mpvX إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها."
   },
   "permission_required_storage": {
     "source_hash": "f48d86a17eb8f3a7affd9a70d8b2bce3e1c2c03a4b28425056af07bf2482d4e5",
-    "translated_value": "يحتاج mpvRex إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها."
+    "translated_value": "يحتاج mpvX إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها."
   },
   "permission_required_all_files": {
     "source_hash": "c7db9d1146c903832fa41d25fb5c979133cd7c69a1a76f43456e73ff67e41080",
-    "translated_value": "يحتاج mpvRex إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث."
+    "translated_value": "يحتاج mpvX إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث."
   },
   "permission_explanation_tiramisu_plus": {
     "source_hash": "8937114a7104cdac78132189939889a6f577d61e72df50eff7a528c70437ff7b",

@@ -10,11 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.automirrored.filled.PlaylistAdd
 import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.DriveFileRenameOutline
 import androidx.compose.material.icons.filled.Info
@@ -23,8 +21,6 @@ import androidx.compose.material.icons.filled.RemoveCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Share
-import androidx.compose.material.icons.filled.SortByAlpha
 import androidx.compose.material.icons.filled.ViewComfy
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,7 +49,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -63,24 +58,15 @@ import xyz.mpv.rex.preferences.AppearancePreferences
 import xyz.mpv.rex.preferences.preference.collectAsState
 import xyz.mpv.rex.ui.theme.DarkMode
 import xyz.mpv.rex.ui.theme.LocalThemeTransitionState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
-import androidx.compose.runtime.LaunchedEffect
-import xyz.mpv.rex.ui.utils.CommunityIcon
-import xyz.mpv.rex.ui.browser.dialogs.CommunityLinksDialog
 
 /**
  * An action that appears in the selection-mode overflow (⋮) menu.
@@ -180,8 +166,6 @@ private fun NormalTopBar(
   val darkTheme = isSystemInDarkTheme()
   val themeTransition = LocalThemeTransitionState.current
   val coroutineScope = rememberCoroutineScope()
-  val showCommunityIcon by preferences.showCommunityIcon.collectAsState()
-  var showCommunityDialog by remember { mutableStateOf(false) }
   
   // Track title bounds for animation position
   val titleBounds = remember { mutableStateOf(Rect.Zero) }
@@ -244,19 +228,7 @@ private fun NormalTopBar(
           )
         }
 
-      val isAppTitleHeader = isHomeScreen || title == stringResource(R.string.app_name) || title == "mpvRex"
-      var showNewName by remember { mutableStateOf(false) }
-
-      if (isAppTitleHeader) {
-        LaunchedEffect(Unit) {
-          while (true) {
-            delay(4000)
-            showNewName = !showNewName
-          }
-        }
-      }
-
-      val displayTitle = if (isAppTitleHeader && showNewName) "REX Player" else title
+      val displayTitle = title
 
       AnimatedContent(
         targetState = displayTitle,
@@ -313,45 +285,6 @@ private fun NormalTopBar(
           Icon(
             Icons.Filled.Search,
             contentDescription = stringResource(R.string.search_empty_title),
-            modifier = Modifier.size(24.dp),
-            tint = MaterialTheme.colorScheme.secondary,
-          )
-        }
-      }
-      if (isHomeScreen && showCommunityIcon) {
-        val infiniteTransition = rememberInfiniteTransition(label = "communityIconAnim")
-        val rotation by infiniteTransition.animateFloat(
-          initialValue = -8f,
-          targetValue = 8f,
-          animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1500, easing = androidx.compose.animation.core.EaseInOutQuad),
-            repeatMode = RepeatMode.Reverse
-          ),
-          label = "rotation"
-        )
-        val scale by infiniteTransition.animateFloat(
-          initialValue = 0.95f,
-          targetValue = 1.05f,
-          animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 1500, easing = androidx.compose.animation.core.EaseInOutQuad),
-            repeatMode = RepeatMode.Reverse
-          ),
-          label = "scale"
-        )
-
-        IconButton(
-          onClick = { showCommunityDialog = true },
-          modifier = Modifier
-            .padding(horizontal = 2.dp)
-            .graphicsLayer {
-              rotationZ = rotation
-              scaleX = scale
-              scaleY = scale
-            },
-        ) {
-          Icon(
-            imageVector = CommunityIcon,
-            contentDescription = stringResource(R.string.community_links),
             modifier = Modifier.size(24.dp),
             tint = MaterialTheme.colorScheme.secondary,
           )
@@ -424,12 +357,6 @@ private fun NormalTopBar(
     },
     modifier = modifier,
   )
-
-  if (showCommunityDialog) {
-    CommunityLinksDialog(
-      onDismissRequest = { showCommunityDialog = false }
-    )
-  }
 }
 
 /**

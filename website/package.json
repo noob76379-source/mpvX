@@ -1,11 +1,11 @@
 {
-  "name": "mpvex-web",
+  "name": "mpvx-web",
   "version": "0.1.0",
   "description": "Advanced mpv-based video player for Android with powerful features, seamless playback, and open-source freedom.",
   "private": true,
   "author": {
-    "name": "marlboro-advance",
-    "url": "https://github.com/marlboro-advance"
+    "name": "sfsakhawat999",
+    "url": "https://github.com/sfsakhawat999"
   },
   "license": "Apache-2.0",
   "keywords": [

@@ -130,7 +130,7 @@ fun rememberThemeTransitionState(): ThemeTransitionState {
 
 /**
  * Overlay composable that handles the circular reveal animation.
- * Uses Shape-based clipping for smooth Telegram-like rendering.
+ * Uses Shape-based clipping for smooth circular reveal rendering.
  */
 @Composable
 private fun ThemeTransitionOverlay(

@@ -1,6 +1,6 @@
 Looking to report an issue/bug or make a feature request? Please refer to the [README](README.md) file.
 
-Thanks for your interest in contributing to mpvRex!
+Thanks for your interest in contributing to mpvX!
 
 This guide outlines our development practices, code guidelines, git workflow, and translation contribution process.
 
@@ -123,14 +123,14 @@ pip install droidlate
 ```
 
 #### 2. Prepare the Repository
-Ensure you have cloned the latest code for mpvRex:
+Ensure you have cloned the latest code for mpvX:
 ```bash
-git clone https://github.com/sfsakhawat999/mpvRex.git
-cd mpvRex
+git clone https://github.com/sfsakhawat999/mpvX.git
+cd mpvX
 ```
 
 #### 3. Start Droidlate
-Open your terminal in the root of the mpvRex directory and run:
+Open your terminal in the root of the mpvX directory and run:
 ```bash
 droidlate
 ```

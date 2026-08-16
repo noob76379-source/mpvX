@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">mpvRex</string>
+    <string name="app_name" translatable="false">mpvX</string>
     <string name="author_name" translatable="false">Sakhawat</string>
 
     <string name="generic_reset">Reset</string>
@@ -17,7 +17,7 @@
     <string name="pref_appearance_category_bottom_nav">Bottom Navigation Tabs</string>
     <string name="pref_appearance_tab_home_title">Home / Files</string>
     <string name="pref_appearance_tab_home_summary">Show local folders &amp; file explorer</string>
-    <string name="pref_appearance_tab_shorts_title">RexShorts</string>
+    <string name="pref_appearance_tab_shorts_title">XShorts</string>
     <string name="pref_appearance_tab_shorts_summary">Toggle high-tempo vertical video feeds</string>
     <string name="pref_appearance_tab_recents_title">Recently Played</string>
     <string name="pref_appearance_tab_recents_summary">Quickly resume previous video sessions</string>
@@ -376,15 +376,6 @@
     <string name="pref_about_donate_upi">UPI</string>
     <string name="pref_about_donate_upi_id" translatable="false">aadiinarvekar@upi</string>
 
-    <string name="pref_about_telegram_title">Telegram</string>
-    <string name="pref_about_telegram_channel">Telegram Channel</string>
-    <string name="pref_about_telegram_channel_summary">Join our channel for updates and news</string>
-    <string name="pref_about_telegram_group">Telegram Chat Group</string>
-    <string name="pref_about_telegram_group_summary">Discuss and chat with the community</string>
-    <string name="pref_about_show_community_icon_title">Community Shortcut</string>
-    <string name="pref_about_show_community_icon_summary">Show community links shortcut in the home header</string>
-    <string name="pref_about_telegram_url" translatable="false">https://t.me/mpvRex</string>
-    <string name="pref_about_telegram_chat_url" translatable="false">https://t.me/mpvRex_chat</string>
 
     <string name="player_sheets_add_ext_sub">Add external subtitles</string>
     <string name="player_sheets_add_ext_audio">Add external audio tracks</string>
@@ -493,7 +484,7 @@
     <string name="volume_slider_absolute_value" translatable="false">%d</string>
     <string name="value_percentage_int" translatable="false">%d%%</string>
 
-    <string name="github_repo_url" translatable="false">https://github.com/sfsakhawat999/mpvRex</string>
+    <string name="github_repo_url" translatable="false">https://github.com/sfsakhawat999/mpvX</string>
     <string name="swap_the_volume_and_brightness_slider">Swap volume and brightness slider</string>
     <string name="pref_player_display_reduce_player_animation">Reduce player animation</string>
     <string name="pref_player_display_hide_player_control_time">Hide player control time</string>
@@ -933,9 +924,6 @@
     <string name="folders_count">Folders (%1$d)</string>
     <string name="media_count">Media (%1$d)</string>
     <string name="drag_to_reorder">Drag to reorder</string>
-    <string name="community_links">Community Links</string>
-    <string name="community_hub">Community Hub</string>
-    <string name="connect_social_media">Connect with us on social media</string>
 
     <!-- Sort Dialog Strings -->
     <string name="sort_and_view_options">Sort &amp; View Options</string>
@@ -946,13 +934,13 @@
     <string name="pref_category_playback_controls">Playback &amp; Controls</string>
     <string name="pref_category_file_management">File Management</string>
     <string name="pref_category_media_settings">Media Settings</string>
-    <string name="pref_category_rexshorts">RexShorts</string>
-    <string name="pref_category_rexshorts_settings">RexShorts Settings</string>
+    <string name="pref_category_rexshorts">XShorts</string>
+    <string name="pref_category_rexshorts_settings">XShorts Settings</string>
     <string name="pref_category_rexshorts_settings_desc">Manage enable/disable, shuffle, and blocked content</string>
     <string name="pref_category_advanced_about">Advanced &amp; About</string>
 
     <!-- Shorts preference screen -->
-    <string name="pref_enable_rexshorts">Enable RexShorts</string>
+    <string name="pref_enable_rexshorts">Enable XShorts</string>
     <string name="pref_enable_rexshorts_summary">Show the Shorts tab in the bottom navigation bar</string>
     <string name="pref_auto_swipe_shorts">Auto Swipe to Next Short</string>
     <string name="pref_auto_swipe_shorts_summary">Automatically swipe to the next short when current one ends</string>
@@ -1043,18 +1031,18 @@
     <string name="allow_access">ALLOW ACCESS</string>
     <string name="why_do_i_see_this">Why do I see this?</string>
     <string name="why_this_permission_is_needed">Why this permission is needed</string>
-    <string name="permission_explanation_playstore_intro">mpvRex needs access to your video files to provide its core functionality as a media player.</string>
+    <string name="permission_explanation_playstore_intro">mpvX needs access to your video files to provide its core functionality as a media player.</string>
     <string name="permission_used_exclusively_for">The permission is used exclusively for:</string>
     <string name="permission_usage_bullet_list">• Discovering and displaying your video files\n• Playing media content\n• Loading subtitle files</string>
-    <string name="permission_explanation_standard_intro">mpvRex has always required storage access permission as it\'s essential for the app to find all media and subtitle files on your device, including the ones that are not supported by the system.</string>
+    <string name="permission_explanation_standard_intro">mpvX has always required storage access permission as it\'s essential for the app to find all media and subtitle files on your device, including the ones that are not supported by the system.</string>
     <string name="permission_security_policy_change">However, due to a change in security policy, apps built for Android 11 and above now require additional permission to continue accessing the same.</string>
     <string name="permission_privacy_assurance_standard">Please know that this permission is only used for the auto-discovery of media/subtitle files on your device and will not allow us to access the private data files stored by other apps in any way.</string>
-    <string name="opensource_github_notice">mpvRex is an open source project. You can review the source code and verify how permissions are used by visiting our GitHub repository at:</string>
+    <string name="opensource_github_notice">mpvX is an open source project. You can review the source code and verify how permissions are used by visiting our GitHub repository at:</string>
     <string name="privacy_assurance_final">Be rest assured, your privacy is our utmost priority, and we neither access your files for other purposes nor transfer or store them to our servers. They remain safe on your device.</string>
     
-    <string name="permission_required_photos_videos">mpvRex requires \"Photos and videos\" permission to access and play your video files stored on your device.</string>
-    <string name="permission_required_storage">mpvRex requires \"Storage\" permission to access and play your media files stored on your device.</string>
-    <string name="permission_required_all_files">mpvRex requires \"All file access\" permission to discover media and subtitles on your device due to a change in security policy in Android 11 and later versions.</string>
+    <string name="permission_required_photos_videos">mpvX requires \"Photos and videos\" permission to access and play your video files stored on your device.</string>
+    <string name="permission_required_storage">mpvX requires \"Storage\" permission to access and play your media files stored on your device.</string>
+    <string name="permission_required_all_files">mpvX requires \"All file access\" permission to discover media and subtitles on your device due to a change in security policy in Android 11 and later versions.</string>
     <string name="permission_explanation_tiramisu_plus">On Android 13 and above, this permission allows the app to read video files from your device\'s storage, including Downloads, Movies, and DCIM folders.</string>
     <string name="permission_explanation_pre_tiramisu">This permission allows the app to read media files from your device\'s storage to play videos and audio.</string>
 

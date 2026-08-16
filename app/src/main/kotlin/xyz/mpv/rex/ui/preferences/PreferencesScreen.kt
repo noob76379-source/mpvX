@@ -308,7 +308,7 @@ object PreferencesScreen : Screen {
             }
           }
 
-          // RexShorts Section
+          // XShorts Section
           item {
             PreferenceSectionHeader(title = stringResource(R.string.pref_category_rexshorts))
           }

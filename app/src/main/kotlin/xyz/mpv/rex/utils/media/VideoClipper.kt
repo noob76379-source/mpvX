@@ -205,7 +205,7 @@ object VideoClipper {
 
     fun getOutputClipFile(inputPath: String, startMs: Long, endMs: Long): File {
         val moviesDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES)
-        val clipsDir = File(moviesDir, "mpvRex")
+        val clipsDir = File(moviesDir, "mpvX")
         if (!clipsDir.exists()) {
             clipsDir.mkdirs()
         }

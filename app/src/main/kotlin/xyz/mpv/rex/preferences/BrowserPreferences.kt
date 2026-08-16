@@ -56,7 +56,7 @@ class BrowserPreferences(
   val includeNoMediaContent = preferenceStore.getBoolean("include_no_media_content", false)
   val showTreeViewPath = preferenceStore.getBoolean("show_tree_view_path", false)
 
-  // RexShorts preferences
+  // XShorts preferences
   val enableShorts = preferenceStore.getBoolean("enable_shorts", true)
   val autoSwipeShorts = preferenceStore.getBoolean("shorts_auto_swipe", false)
   val enableGlassShortsControls = preferenceStore.getBoolean("enable_glass_shorts_controls", false)
