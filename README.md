@@ -108,7 +108,8 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 
 mpvX acknowledges the open-source projects that have influenced, supported, or contributed to its development:
 
-- [mpvEx](https://github.com/marlboro-advance/mpvEx) — Apache-2.0
+- [mpvRex](https://github.com/sfsakhawat999/mpvRex) — Apache-2.0 — direct upstream project for mpvX
+- [mpvEx](https://github.com/marlboro-advance/mpvEx) — Apache-2.0 — upstream project of mpvRex
 - [mpv-android](https://github.com/mpv-android/mpv-android) — MIT
 - [mpvKt](https://github.com/abdallahmehiz/mpvKt) — Apache-2.0
 - [Next Player](https://github.com/anilbeesetti/nextplayer) — GPL-3.0
