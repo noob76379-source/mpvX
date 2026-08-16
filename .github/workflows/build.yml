@@ -53,24 +53,13 @@ jobs:
 
             signed="${apk%-unsigned.apk}-signed.apk"
 
-            jarsigner \
-              -verbose \
-              -sigalg SHA384withRSA \
-              -digestalg SHA-256 \
-              -keystore "$KEYSTORE" \
-              -storepass "$KEYSTORE_PASSWORD" \
-              -keypass "$KEY_PASSWORD" \
-              "$apk" \
-              "$KEY_ALIAS"
-
-            mv "$apk" "$signed"
-
             "$APKSIGNER" sign \
               --ks "$KEYSTORE" \
               --ks-pass "pass:$KEYSTORE_PASSWORD" \
               --key-pass "pass:$KEY_PASSWORD" \
               --ks-key-alias "$KEY_ALIAS" \
-              "$signed"
+              --out "$signed" \
+              "$apk"
 
             "$APKSIGNER" verify --verbose "$signed"
 
@@ -109,4 +98,4 @@ jobs:
 
       - name: Cleanup keystore
         if: always()
-        run: rm -f "$RUNNER_TEMP/mpvRex.jks"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              run: rm -f mpvRex.jks
+        run: rm -f "$RUNNER_TEMP/mpvRex.jks"
