@@ -584,7 +584,7 @@ fun MiniPlayer(
             )
 
             Text(
-              text = state.artist.ifBlank { "mpvRex Media Player" },
+              text = state.artist.ifBlank { "mpvX Media Player" },
               style = MaterialTheme.typography.bodySmall,
               maxLines = 1,
               overflow = TextOverflow.Ellipsis,

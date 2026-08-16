@@ -244,7 +244,7 @@ private fun NormalTopBar(
           )
         }
 
-      val isAppTitleHeader = isHomeScreen || title == stringResource(R.string.app_name) || title == "mpvRex"
+      val isAppTitleHeader = isHomeScreen || title == stringResource(R.string.app_name) || title == "mpvX"
       var showNewName by remember { mutableStateOf(false) }
 
       if (isAppTitleHeader) {

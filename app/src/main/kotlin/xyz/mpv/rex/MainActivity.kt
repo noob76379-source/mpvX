@@ -286,7 +286,7 @@ class MainActivity : ComponentActivity() {
                 context.startActivity(
                   Intent(
                     Intent.ACTION_VIEW, 
-                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvRex/releases/latest").toUri()
+                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvX/releases/latest").toUri()
                   )
                 )
                 // updateViewModel.downloadUpdate(release) // Kept in code but disabled for now
@@ -308,7 +308,7 @@ class MainActivity : ComponentActivity() {
                 context.startActivity(
                   Intent(
                     Intent.ACTION_VIEW, 
-                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvRex/releases/latest").toUri()
+                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvX/releases/latest").toUri()
                   )
                 )
                 // updateViewModel.installUpdate(release) // Kept in code but disabled for now

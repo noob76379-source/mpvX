@@ -3233,7 +3233,7 @@
   },
   "permission_explanation_playstore_intro": {
     "source_hash": "7c58da3afdee9176c232d32f8820dad935e3491384934dfd4f8d1f87a0967a8c",
-    "translated_value": "يحتاج mpvRex إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط."
+    "translated_value": "يحتاج mpvX إلى الوصول لملفات الفيديو الخاصة بك لتوفير وظيفته الأساسية كمشغل وسائط."
   },
   "permission_used_exclusively_for": {
     "source_hash": "6ed4e23643e43257622b531cb481838c21b6569b17ffce10bd869b2e28d5503f",
@@ -3245,7 +3245,7 @@
   },
   "permission_explanation_standard_intro": {
     "source_hash": "b3984644043ddf9ee0874be53633a2deba9894802268407b9d62a664de32f86e",
-    "translated_value": "يتطلب mpvRex دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام."
+    "translated_value": "يتطلب mpvX دائماً إذن الوصول للتخزين لأنه ضروري لعثور التطبيق على جميع ملفات الوسائط والترجمة الموجودة على جهازك، بما فيها الملفات غير المدعومة من طرف النظام."
   },
   "permission_security_policy_change": {
     "source_hash": "e75ddded5ead1b18d34976c5d562bf8a049bb1655140974b64fcdc9df7d7a7a8",
@@ -3257,7 +3257,7 @@
   },
   "opensource_github_notice": {
     "source_hash": "33b54a5eb9477bcf424e306dab1ef42970b4ce83bc38c015b71e233466ebb507",
-    "translated_value": "mpvRex مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:"
+    "translated_value": "mpvX مشروع مفتوح المصدر. يمكنك مراجعة الكود المصدري والتحقق من كيفية استخدام الأذونات بزيارة مستودعنا على GitHub في:"
   },
   "privacy_assurance_final": {
     "source_hash": "6526f0743b4a35b0f23d3ecc9cadf55eaa290512bbd8dfa0c4dbecf11bba6035",
@@ -3265,15 +3265,15 @@
   },
   "permission_required_photos_videos": {
     "source_hash": "c52cca55c3667c09dcdf418ebc3f73c550080308f87ebc5eedbb3a487a92726a",
-    "translated_value": "يحتاج mpvRex إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها."
+    "translated_value": "يحتاج mpvX إذن \"الصور والفيديوهات\" للوصول لملفات الفيديو المخزنة على جهازك وتشغيلها."
   },
   "permission_required_storage": {
     "source_hash": "f48d86a17eb8f3a7affd9a70d8b2bce3e1c2c03a4b28425056af07bf2482d4e5",
-    "translated_value": "يحتاج mpvRex إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها."
+    "translated_value": "يحتاج mpvX إذن \"التخزين\" للوصول لملفات الوسائط المخزنة على جهازك وتشغيلها."
   },
   "permission_required_all_files": {
     "source_hash": "c7db9d1146c903832fa41d25fb5c979133cd7c69a1a76f43456e73ff67e41080",
-    "translated_value": "يحتاج mpvRex إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث."
+    "translated_value": "يحتاج mpvX إذن \"الوصول لجميع الملفات\" لاكتشاف ملفات الوسائط والترجمة على جهازك بسبب تغيير في سياسة الأمان في أندرويد 11 والإصدارات الأحدث."
   },
   "permission_explanation_tiramisu_plus": {
     "source_hash": "8937114a7104cdac78132189939889a6f577d61e72df50eff7a528c70437ff7b",

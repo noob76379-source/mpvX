@@ -3445,7 +3445,7 @@
   },
   "permission_explanation_playstore_intro": {
     "source_hash": "7c58da3afdee9176c232d32f8820dad935e3491384934dfd4f8d1f87a0967a8c",
-    "translated_value": "mpvRex 需要访问视频文件，以此实现媒体播放器核心功能。"
+    "translated_value": "mpvX 需要访问视频文件，以此实现媒体播放器核心功能。"
   },
   "permission_used_exclusively_for": {
     "source_hash": "6ed4e23643e43257622b531cb481838c21b6569b17ffce10bd869b2e28d5503f",
@@ -3457,7 +3457,7 @@
   },
   "permission_explanation_standard_intro": {
     "source_hash": "b3984644043ddf9ee0874be53633a2deba9894802268407b9d62a664de32f86e",
-    "translated_value": "mpvRex 一直需要存储权限，以便检索设备内所有媒体与字幕文件，包含系统无法识别的格式。"
+    "translated_value": "mpvX 一直需要存储权限，以便检索设备内所有媒体与字幕文件，包含系统无法识别的格式。"
   },
   "permission_security_policy_change": {
     "source_hash": "e75ddded5ead1b18d34976c5d562bf8a049bb1655140974b64fcdc9df7d7a7a8",
@@ -3469,7 +3469,7 @@
   },
   "opensource_github_notice": {
     "source_hash": "33b54a5eb9477bcf424e306dab1ef42970b4ce83bc38c015b71e233466ebb507",
-    "translated_value": "mpvRex 是开源项目，你可以前往 GitHub 仓库查看源代码，验证权限调用逻辑："
+    "translated_value": "mpvX 是开源项目，你可以前往 GitHub 仓库查看源代码，验证权限调用逻辑："
   },
   "privacy_assurance_final": {
     "source_hash": "6526f0743b4a35b0f23d3ecc9cadf55eaa290512bbd8dfa0c4dbecf11bba6035",
@@ -3477,15 +3477,15 @@
   },
   "permission_required_photos_videos": {
     "source_hash": "c52cca55c3667c09dcdf418ebc3f73c550080308f87ebc5eedbb3a487a92726a",
-    "translated_value": "mpvRex 需要「照片和视频」权限，用于访问并播放设备内的视频文件。"
+    "translated_value": "mpvX 需要「照片和视频」权限，用于访问并播放设备内的视频文件。"
   },
   "permission_required_storage": {
     "source_hash": "f48d86a17eb8f3a7affd9a70d8b2bce3e1c2c03a4b28425056af07bf2482d4e5",
-    "translated_value": "mpvRex 需要「存储」权限，用于访问并播放设备内的媒体文件。"
+    "translated_value": "mpvX 需要「存储」权限，用于访问并播放设备内的媒体文件。"
   },
   "permission_required_all_files": {
     "source_hash": "c7db9d1146c903832fa41d25fb5c979133cd7c69a1a76f43456e73ff67e41080",
-    "translated_value": "Android 11 及以上系统策略变更，mpvRex 需要「所有文件访问权限」以扫描媒体与字幕文件。"
+    "translated_value": "Android 11 及以上系统策略变更，mpvX 需要「所有文件访问权限」以扫描媒体与字幕文件。"
   },
   "permission_explanation_tiramisu_plus": {
     "source_hash": "8937114a7104cdac78132189939889a6f577d61e72df50eff7a528c70437ff7b",
