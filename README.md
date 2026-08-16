@@ -106,18 +106,20 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 
 ## Credits
 
-mpvX builds on the work of the open-source Android media-player community, including:
+mpvX acknowledges the open-source projects that have influenced, supported, or contributed to its development:
 
-- [mpvEx](https://github.com/marlboro-advance/mpvEx)
-- [mpv-android](https://github.com/mpv-android/mpv-android)
-- [mpvKt](https://github.com/abdallahmehiz/mpvKt)
-- [Next Player](https://github.com/anilbeesetti/nextplayer)
-- [Gramophone](https://github.com/FoedusProgramme/Gramophone)
+- [mpvEx](https://github.com/marlboro-advance/mpvEx) — Apache-2.0
+- [mpv-android](https://github.com/mpv-android/mpv-android) — MIT
+- [mpvKt](https://github.com/abdallahmehiz/mpvKt) — Apache-2.0
+- [Next Player](https://github.com/anilbeesetti/nextplayer) — GPL-3.0
+- [Gramophone](https://github.com/FoedusProgramme/Gramophone) — GPL-3.0
 
-Thank you to the developers and contributors whose work helped make mpvX possible.
+See **[Third-Party Licenses & Attribution](THIRD_PARTY_LICENSES.md)** for the source and license links.
 
 ---
 
 ## License
 
-mpvX is distributed under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.
+The original mpvX code is distributed under the **[Apache License 2.0](LICENSE)**, subject to the separate licenses and attribution requirements of third-party components.
+
+**Third-party software is not relicensed as mpvX.** Copyright notices and applicable license terms remain with their respective authors and contributors.
