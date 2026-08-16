@@ -70,19 +70,12 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 
-/**
- * An action that appears in the selection-mode overflow (⋮) menu.
- * Pass a list of these via [BrowserTopBar.selectionOverflowActions] to populate the menu.
- */
 data class SelectionOverflowAction(
   val icon: ImageVector,
   val label: String,
   val onClick: () -> Unit,
 )
 
-/**
- * Unified top bar for browser screens that switches between normal and selection modes
- */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun BrowserTopBar(
@@ -146,9 +139,6 @@ fun BrowserTopBar(
   }
 }
 
-/**
- * Normal mode top bar
- */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 private fun NormalTopBar(
@@ -168,11 +158,8 @@ private fun NormalTopBar(
   val darkTheme = isSystemInDarkTheme()
   val themeTransition = LocalThemeTransitionState.current
   val coroutineScope = rememberCoroutineScope()
-  
-  // Track title bounds for animation position
   val titleBounds = remember { mutableStateOf(Rect.Zero) }
-  
-  // Helper function to toggle dark mode
+
   fun toggleDarkMode() {
     when (darkMode) {
       DarkMode.System -> if (darkTheme) {
@@ -209,16 +196,12 @@ private fun NormalTopBar(
         .pointerInput(onTitleLongPress) {
           detectTapGestures(
             onTap = { localOffset ->
-              // Don't allow theme change if animation is in progress
               if (themeTransition?.isAnimating == true) return@detectTapGestures
-              
-              // Calculate window position for circular reveal
               val windowOffset = Offset(
                 titleBounds.value.left + localOffset.x,
                 titleBounds.value.top + localOffset.y
               )
               themeTransition?.startTransition(windowOffset)
-              // Delay theme change to allow overlay to display first
               coroutineScope.launch {
                 delay(50)
                 toggleDarkMode()
@@ -254,24 +237,18 @@ private fun NormalTopBar(
       ) { currentTitle ->
         Text(
           currentTitle,
-          style =
-            if (onBackClick == null) {
-              MaterialTheme.typography.headlineMediumEmphasized
-            } else {
-              MaterialTheme.typography.headlineSmall
-            },
+          style = if (onBackClick == null) {
+            MaterialTheme.typography.headlineMediumEmphasized
+          } else {
+            MaterialTheme.typography.headlineSmall
+          },
           fontWeight = FontWeight.ExtraBold,
           color = MaterialTheme.colorScheme.primary,
           maxLines = 1,
           overflow = TextOverflow.Ellipsis,
-          modifier =
-            titleModifier.then(
-              if (onBackClick == null) {
-                Modifier.padding(start = 8.dp)
-              } else {
-                Modifier
-              },
-            ),
+          modifier = titleModifier.then(
+            if (onBackClick == null) Modifier.padding(start = 8.dp) else Modifier,
+          ),
         )
       }
     },
@@ -280,3 +257,215 @@ private fun NormalTopBar(
         IconButton(
           onClick = onBackClick,
           modifier = Modifier.padding(horizontal = 2.dp),
+        ) {
+          Icon(
+            Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = stringResource(R.string.back),
+            modifier = Modifier.size(24.dp),
+            tint = MaterialTheme.colorScheme.secondary,
+          )
+        }
+      }
+    },
+    actions = {
+      if (onSearchClick != null) {
+        IconButton(onClick = onSearchClick, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.Search, contentDescription = stringResource(R.string.search_empty_title), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+        }
+      }
+      if (onSortClick != null) {
+        IconButton(onClick = onSortClick, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Default.ViewComfy, contentDescription = stringResource(R.string.sort), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+        }
+      }
+      if (onSettingsClick != null) {
+        IconButton(onClick = onSettingsClick, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.Settings, contentDescription = stringResource(R.string.settings), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+        }
+      }
+      additionalActions()
+      if (normalOverflowActions.isNotEmpty()) {
+        var showNormalOverflowMenu by remember { mutableStateOf(false) }
+        Box(modifier = Modifier.padding(start = 0.dp, end = 4.dp)) {
+          IconButton(onClick = { showNormalOverflowMenu = true }) {
+            Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.more_options), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+          }
+          DropdownMenu(
+            expanded = showNormalOverflowMenu,
+            onDismissRequest = { showNormalOverflowMenu = false },
+          ) {
+            normalOverflowActions.forEach { action ->
+              DropdownMenuItem(
+                leadingIcon = {
+                  Icon(imageVector = action.icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                },
+                text = { Text(action.label) },
+                onClick = {
+                  action.onClick()
+                  showNormalOverflowMenu = false
+                },
+              )
+            }
+          }
+        }
+      }
+    },
+    modifier = modifier,
+  )
+}
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+private fun SelectionTopBar(
+  selectedCount: Int,
+  totalCount: Int,
+  onCancel: () -> Unit,
+  onDelete: (() -> Unit)?,
+  onRename: (() -> Unit)?,
+  isSingleSelection: Boolean,
+  onInfo: (() -> Unit)?,
+  onPlay: (() -> Unit)?,
+  onSelectAll: (() -> Unit)?,
+  onInvertSelection: (() -> Unit)?,
+  onDeselectAll: (() -> Unit)?,
+  overflowActions: List<SelectionOverflowAction> = emptyList(),
+  modifier: Modifier = Modifier,
+  useRemoveIcon: Boolean = false,
+  deleteInOverflow: Boolean = false,
+) {
+  var showDropdown by remember { mutableStateOf(false) }
+  var showOverflowMenu by remember { mutableStateOf(false) }
+
+  TopAppBar(
+    colors = TopAppBarDefaults.topAppBarColors(
+      containerColor = if (MaterialTheme.colorScheme.background == Color.Black) Color.Black else MaterialTheme.colorScheme.surfaceContainer,
+    ),
+    title = {
+      Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier.clickable { showDropdown = true },
+      ) {
+        Text(
+          stringResource(R.string.selected_items, selectedCount, totalCount),
+          style = MaterialTheme.typography.titleMedium,
+          color = MaterialTheme.colorScheme.primary,
+          maxLines = 1,
+          overflow = TextOverflow.Ellipsis,
+        )
+        Icon(
+          Icons.Filled.ArrowDropDown,
+          contentDescription = stringResource(R.string.selection_options),
+          modifier = Modifier.size(24.dp),
+          tint = MaterialTheme.colorScheme.primary,
+        )
+        DropdownMenu(
+          expanded = showDropdown,
+          onDismissRequest = { showDropdown = false },
+        ) {
+          if (onSelectAll != null) {
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.select_all)) },
+              onClick = {
+                onSelectAll()
+                showDropdown = false
+              },
+            )
+          }
+          if (onInvertSelection != null) {
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.invert_selection)) },
+              onClick = {
+                onInvertSelection()
+                showDropdown = false
+              },
+            )
+          }
+          if (onDeselectAll != null) {
+            DropdownMenuItem(
+              text = { Text(stringResource(R.string.deselect_all)) },
+              onClick = {
+                onDeselectAll()
+                showDropdown = false
+              },
+            )
+          }
+        }
+      }
+    },
+    navigationIcon = {
+      IconButton(onClick = onCancel, modifier = Modifier.padding(horizontal = 2.dp)) {
+        Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.generic_cancel), modifier = Modifier.size(28.dp), tint = MaterialTheme.colorScheme.secondary)
+      }
+    },
+    actions = {
+      if (onPlay != null) {
+        IconButton(onClick = onPlay, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.PlayArrow, contentDescription = stringResource(R.string.play), modifier = Modifier.size(28.dp), tint = MaterialTheme.colorScheme.primary)
+        }
+      }
+      if (onRename != null) {
+        IconButton(onClick = onRename, enabled = isSingleSelection, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(
+            Icons.Filled.DriveFileRenameOutline,
+            contentDescription = stringResource(R.string.rename),
+            modifier = Modifier.size(24.dp),
+            tint = if (isSingleSelection) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f),
+          )
+        }
+      }
+      if (onDelete != null && useRemoveIcon) {
+        IconButton(onClick = onDelete, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.RemoveCircle, contentDescription = stringResource(R.string.delete), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.error)
+        }
+      }
+      if (onInfo != null) {
+        IconButton(onClick = onInfo, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.Info, contentDescription = stringResource(R.string.info), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+        }
+      }
+      if (onDelete != null && !useRemoveIcon && !deleteInOverflow) {
+        IconButton(onClick = onDelete, modifier = Modifier.padding(horizontal = 2.dp)) {
+          Icon(Icons.Filled.Delete, contentDescription = stringResource(R.string.delete), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.error)
+        }
+      }
+      val hasDeleteInOverflow = deleteInOverflow && onDelete != null
+      if (overflowActions.isNotEmpty() || hasDeleteInOverflow) {
+        Box(modifier = Modifier.padding(start = 0.dp, end = 4.dp)) {
+          IconButton(onClick = { showOverflowMenu = true }) {
+            Icon(Icons.Filled.MoreVert, contentDescription = stringResource(R.string.more_options), modifier = Modifier.size(24.dp), tint = MaterialTheme.colorScheme.secondary)
+          }
+          DropdownMenu(
+            expanded = showOverflowMenu,
+            onDismissRequest = { showOverflowMenu = false },
+          ) {
+            if (hasDeleteInOverflow) {
+              DropdownMenuItem(
+                leadingIcon = {
+                  Icon(Icons.Filled.Delete, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.error)
+                },
+                text = { Text(stringResource(R.string.delete), color = MaterialTheme.colorScheme.error) },
+                onClick = {
+                  onDelete()
+                  showOverflowMenu = false
+                },
+              )
+            }
+            overflowActions.forEach { action ->
+              DropdownMenuItem(
+                leadingIcon = {
+                  Icon(imageVector = action.icon, contentDescription = null, modifier = Modifier.size(20.dp), tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                },
+                text = { Text(action.label) },
+                onClick = {
+                  action.onClick()
+                  showOverflowMenu = false
+                },
+              )
+            }
+          }
+        }
+      }
+    },
+    modifier = modifier.clip(RoundedCornerShape(bottomStart = 28.dp, bottomEnd = 28.dp)),
+  )
+}
