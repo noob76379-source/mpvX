@@ -374,8 +374,8 @@
     <string name="pref_about_telegram_group_summary">和其他用户交流讨论</string>
     <string name="pref_about_show_community_icon_title">社群快捷入口</string>
     <string name="pref_about_show_community_icon_summary">在首页顶部显示社群链接图标</string>
-    <string name="pref_about_telegram_url" translatable="false">https://t.me/mpvRex</string>
-    <string name="pref_about_telegram_chat_url" translatable="false">https://t.me/mpvRex_chat</string>
+    <string name="pref_about_telegram_url" translatable="false">https://t.me/mpvX</string>
+    <string name="pref_about_telegram_chat_url" translatable="false">https://t.me/mpvX_chat</string>
 
     <string name="player_sheets_add_ext_sub">加载外部字幕</string>
     <string name="player_sheets_add_ext_audio">加载外置音轨</string>
@@ -484,7 +484,7 @@
     <string name="volume_slider_absolute_value" translatable="false">%d</string>
     <string name="value_percentage_int" translatable="false">%d%%</string>
 
-    <string name="github_repo_url" translatable="false">https://github.com/sfsakhawat999/mpvRex</string>
+    <string name="github_repo_url" translatable="false">https://github.com/sfsakhawat999/mpvX</string>
     <string name="swap_the_volume_and_brightness_slider">交换音量与亮度滑动手势区域</string>
     <string name="pref_player_display_reduce_player_animation">减少播放器动画效果</string>
     <string name="pref_player_display_hide_player_control_time">隐藏控制栏时间</string>
@@ -1007,18 +1007,18 @@
     <string name="allow_access">允许访问</string>
     <string name="why_do_i_see_this">为什么弹出此提示？</string>
     <string name="why_this_permission_is_needed">权限用途说明</string>
-    <string name="permission_explanation_playstore_intro">mpvRex 需要访问视频文件，以此实现媒体播放器核心功能。</string>
+    <string name="permission_explanation_playstore_intro">mpvX 需要访问视频文件，以此实现媒体播放器核心功能。</string>
     <string name="permission_used_exclusively_for">该权限仅用于：</string>
     <string name="permission_usage_bullet_list">• 检索并展示本地视频文件\n• 播放媒体内容\n• 加载字幕文件</string>
-    <string name="permission_explanation_standard_intro">mpvRex 一直需要存储权限，以便检索设备内所有媒体与字幕文件，包含系统无法识别的格式。</string>
+    <string name="permission_explanation_standard_intro">mpvX 一直需要存储权限，以便检索设备内所有媒体与字幕文件，包含系统无法识别的格式。</string>
     <string name="permission_security_policy_change">受系统安全策略变更影响，面向 Android 11 及以上编译的应用，需要额外权限才能正常读取文件。</string>
     <string name="permission_privacy_assurance_standard">该权限仅用于自动扫描媒体与字幕文件，不会读取其他应用的私有数据。</string>
-    <string name="opensource_github_notice">mpvRex 是开源项目，你可以前往 GitHub 仓库查看源代码，验证权限调用逻辑：</string>
+    <string name="opensource_github_notice">mpvX 是开源项目，你可以前往 GitHub 仓库查看源代码，验证权限调用逻辑：</string>
     <string name="privacy_assurance_final">我们高度重视你的隐私。应用不会将你的文件用于其他用途，不上传、不存储文件至服务器，所有文件仅保存在本机。</string>
     
-    <string name="permission_required_photos_videos">mpvRex 需要「照片和视频」权限，用于访问并播放设备内的视频文件。</string>
-    <string name="permission_required_storage">mpvRex 需要「存储」权限，用于访问并播放设备内的媒体文件。</string>
-    <string name="permission_required_all_files">Android 11 及以上系统策略变更，mpvRex 需要「所有文件访问权限」以扫描媒体与字幕文件。</string>
+    <string name="permission_required_photos_videos">mpvX 需要「照片和视频」权限，用于访问并播放设备内的视频文件。</string>
+    <string name="permission_required_storage">mpvX 需要「存储」权限，用于访问并播放设备内的媒体文件。</string>
+    <string name="permission_required_all_files">Android 11 及以上系统策略变更，mpvX 需要「所有文件访问权限」以扫描媒体与字幕文件。</string>
     <string name="permission_explanation_tiramisu_plus">Android 13及以上，该权限允许应用读取下载、影片、DCIM 等目录下的视频文件。</string>
     <string name="permission_explanation_pre_tiramisu">该权限允许读取设备媒体文件，用于播放音视频。</string>
 

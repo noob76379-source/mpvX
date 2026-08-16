@@ -36,11 +36,11 @@ jobs:
 
       - name: Decode keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > "$RUNNER_TEMP/mpvRex.jks"
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > "$RUNNER_TEMP/mpvX.jks"
 
       - name: Sign and verify APKs
         env:
-          KEYSTORE: ${{ runner.temp }}/mpvRex.jks
+          KEYSTORE: ${{ runner.temp }}/mpvX.jks
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
@@ -69,33 +69,33 @@ jobs:
       - name: Upload arm64-v8a Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mpvRex-arm64-v8a-release-signed-${{ env.SHORT_SHA }}
+          name: mpvX-arm64-v8a-release-signed-${{ env.SHORT_SHA }}
           path: app/build/outputs/apk/release/app-arm64-v8a-release-signed.apk
 
       - name: Upload armeabi-v7a Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mpvRex-armeabi-v7a-release-signed-${{ env.SHORT_SHA }}
+          name: mpvX-armeabi-v7a-release-signed-${{ env.SHORT_SHA }}
           path: app/build/outputs/apk/release/app-armeabi-v7a-release-signed.apk
 
       - name: Upload universal Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mpvRex-universal-release-signed-${{ env.SHORT_SHA }}
+          name: mpvX-universal-release-signed-${{ env.SHORT_SHA }}
           path: app/build/outputs/apk/release/app-universal-release-signed.apk
 
       - name: Upload x86 Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mpvRex-x86-release-signed-${{ env.SHORT_SHA }}
+          name: mpvX-x86-release-signed-${{ env.SHORT_SHA }}
           path: app/build/outputs/apk/release/app-x86-release-signed.apk
 
       - name: Upload x86_64 Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: mpvRex-x86_64-release-signed-${{ env.SHORT_SHA }}
+          name: mpvX-x86_64-release-signed-${{ env.SHORT_SHA }}
           path: app/build/outputs/apk/release/app-x86_64-release-signed.apk
 
       - name: Cleanup keystore
         if: always()
-        run: rm -f "$RUNNER_TEMP/mpvRex.jks"
+        run: rm -f "$RUNNER_TEMP/mpvX.jks"

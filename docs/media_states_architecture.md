@@ -1,6 +1,6 @@
-# mpvRex Media States & Visual Styling Architecture
+# mpvX Media States & Visual Styling Architecture
 
-This document maps out the full picture of the media item states in the **mpvRex** file browser. It outlines how states are stored, calculated, and visualised, diagnoses why the recent bugs occurred, and defines a robust, permanent solution.
+This document maps out the full picture of the media item states in the **mpvX** file browser. It outlines how states are stored, calculated, and visualised, diagnoses why the recent bugs occurred, and defines a robust, permanent solution.
 
 ---
 
@@ -88,7 +88,7 @@ The visual precedence is resolved using a custom `shouldHighlight = isRecentlyPl
 
 ## 5. Applied Implementation Details
 
-### A. [BaseMediaCard.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/cards/BaseMediaCard.kt)
+### A. [BaseMediaCard.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/cards/BaseMediaCard.kt)
 Ensure `shouldHighlight` is evaluated in both Grid and List card layout variations:
 ```kotlin
 val shouldHighlight = isRecentlyPlayed && !(isWatched && isNeverPlayed)
@@ -100,7 +100,7 @@ color = when {
 fontWeight = if (shouldHighlight) FontWeight.Black else FontWeight.Normal
 ```
 
-### B. [FileSystemBrowserScreen.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/filesystem/FileSystemBrowserScreen.kt)
+### B. [FileSystemBrowserScreen.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/filesystem/FileSystemBrowserScreen.kt)
 Updated the video items inside `FileSystemSearchContent` to calculate `lastPlayedVideoPathsInFolder` within the search results set, and highlight them:
 ```kotlin
 val lastPlayedVideoPathsInFolder = remember(searchResults, recentlyPlayedPaths, recentlyPlayedFilePaths) {
@@ -118,7 +118,7 @@ isRecentlyPlayed = videoFile.video.path in lastPlayedVideoPathsInFolder
 ```
 For folders, updated `FolderCard`'s `isRecentlyPlayed` to check if the folder path is the parent of any active global last played path in `recentlyPlayedFilePaths`.
 
-### C. [UnifiedExplorerContent.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/components/UnifiedExplorerContent.kt)
+### C. [UnifiedExplorerContent.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/components/UnifiedExplorerContent.kt)
 Introduced `LocalLastPlayedVideoPathsInFolder` and `LocalRecentlyPlayedFilePaths` CompositionLocals to cleanly pass the folder's last-played items and active global last-played paths to card rendering.
 At the root of the rendering block:
 ```kotlin
@@ -148,7 +148,7 @@ val isRecentlyPlayed = item.path in lastPlayedVideoPathsInFolder // (or item.vid
 ```
 For folders, updated `FolderCard`'s `isRecentlyPlayed` to check if the folder is the parent of any path in `LocalRecentlyPlayedFilePaths.current`.
 
-### D. [RecentlyPlayedOps.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/utils/history/RecentlyPlayedOps.kt)
+### D. [RecentlyPlayedOps.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/utils/history/RecentlyPlayedOps.kt)
 Introduced the `observeLastPlayedPathsForHighlight()` flow which handles returning either the single last played item, or the batch of items marked as last played:
 ```kotlin
 fun observeLastPlayedPathsForHighlight(): Flow<Set<String>> {
@@ -171,7 +171,7 @@ fun observeLastPlayedPathsForHighlight(): Flow<Set<String>> {
 }
 ```
 
-### E. [BaseBrowserViewModel.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/base/BaseBrowserViewModel.kt)
+### E. [BaseBrowserViewModel.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/base/BaseBrowserViewModel.kt)
 Exposed `recentlyPlayedFilePaths` as an observable `StateFlow<Set<String>>` for all extending ViewModels (including `FolderListViewModel`, `VideoListViewModel`, and `MediaLibraryViewModel`):
 ```kotlin
 val recentlyPlayedFilePaths: StateFlow<Set<String>> =
@@ -180,15 +180,15 @@ val recentlyPlayedFilePaths: StateFlow<Set<String>> =
     .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 ```
 
-### F. Screen integrations ([VideoListScreen.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/videolist/VideoListScreen.kt), [FolderListScreen.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/folderlist/FolderListScreen.kt), [MediaLibraryContent.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/ui/browser/medialibrary/MediaLibraryContent.kt))
+### F. Screen integrations ([VideoListScreen.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/videolist/VideoListScreen.kt), [FolderListScreen.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/folderlist/FolderListScreen.kt), [MediaLibraryContent.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/ui/browser/medialibrary/MediaLibraryContent.kt))
 Updated the Composable screens and sub-contents to observe `recentlyPlayedFilePaths` and pass it down to `UnifiedExplorerContent`:
 * Collected via `val recentlyPlayedFilePaths by viewModel.recentlyPlayedFilePaths.collectAsState()`
 * Passed down as parameter `recentlyPlayedFilePaths = recentlyPlayedFilePaths` to the respective list containers.
 
-### G. [RecentlyPlayedDao.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/database/dao/RecentlyPlayedDao.kt)
+### G. [RecentlyPlayedDao.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/database/dao/RecentlyPlayedDao.kt)
 Updated `getLastPlayedForHighlight()` and `observeLastPlayedForHighlight()` queries to include `'mark_as_last_played'` in the whitelisted `launchSource` database check so that manually marked items successfully register as global last played targets.
 
-### H. [HistoryManager.kt](file:///root/Projects/mpvRex/app/src/main/kotlin/xyz/mpv/rex/utils/history/HistoryManager.kt)
+### H. [HistoryManager.kt](file:///root/Projects/mpvX/app/src/main/kotlin/xyz/mpv/rex/utils/history/HistoryManager.kt)
 Updated the `MarkAsState.LastPlayed` handler to write `launchSource = "mark_as_last_played"` to history instead of `"mark_as"`, allowing it to bypass finished-state dimming rules and trigger active highlight status.
 
 
