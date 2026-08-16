@@ -35,7 +35,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -62,13 +61,6 @@ import xyz.mpv.rex.ui.theme.LocalThemeTransitionState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.togetherWith
 
 data class SelectionOverflowAction(
   val icon: ImageVector,
@@ -213,44 +205,21 @@ private fun NormalTopBar(
           )
         }
 
-      val isAppTitleHeader = isHomeScreen || title == stringResource(R.string.app_name) || title == "mpvX"
-      var showNewName by remember { mutableStateOf(false) }
-
-      if (isAppTitleHeader) {
-        LaunchedEffect(Unit) {
-          while (true) {
-            delay(4000)
-            showNewName = !showNewName
-          }
-        }
-      }
-
-      val displayTitle = if (isAppTitleHeader && showNewName) "REX Player" else title
-
-      AnimatedContent(
-        targetState = displayTitle,
-        transitionSpec = {
-          (fadeIn(animationSpec = tween(600)) + slideInVertically { height -> height / 2 })
-            .togetherWith(fadeOut(animationSpec = tween(600)) + slideOutVertically { height -> -height / 2 })
+      Text(
+        title,
+        style = if (onBackClick == null) {
+          MaterialTheme.typography.headlineMediumEmphasized
+        } else {
+          MaterialTheme.typography.headlineSmall
         },
-        label = "HeaderTitleTransition",
-      ) { currentTitle ->
-        Text(
-          currentTitle,
-          style = if (onBackClick == null) {
-            MaterialTheme.typography.headlineMediumEmphasized
-          } else {
-            MaterialTheme.typography.headlineSmall
-          },
-          fontWeight = FontWeight.ExtraBold,
-          color = MaterialTheme.colorScheme.primary,
-          maxLines = 1,
-          overflow = TextOverflow.Ellipsis,
-          modifier = titleModifier.then(
-            if (onBackClick == null) Modifier.padding(start = 8.dp) else Modifier,
-          ),
-        )
-      }
+        fontWeight = FontWeight.ExtraBold,
+        color = MaterialTheme.colorScheme.primary,
+        maxLines = 1,
+        overflow = TextOverflow.Ellipsis,
+        modifier = titleModifier.then(
+          if (onBackClick == null) Modifier.padding(start = 8.dp) else Modifier,
+        ),
+      )
     },
     navigationIcon = {
       if (onBackClick != null) {
