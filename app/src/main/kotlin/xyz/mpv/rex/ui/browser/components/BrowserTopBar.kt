@@ -228,7 +228,19 @@ private fun NormalTopBar(
           )
         }
 
-      val displayTitle = title
+      val isAppTitleHeader = isHomeScreen || title == stringResource(R.string.app_name) || title == "mpvX"
+      var showNewName by remember { mutableStateOf(false) }
+
+      if (isAppTitleHeader) {
+        LaunchedEffect(Unit) {
+          while (true) {
+            delay(4000)
+            showNewName = !showNewName
+          }
+        }
+      }
+
+      val displayTitle = if (isAppTitleHeader && showNewName) "REX Player" else title
 
       AnimatedContent(
         targetState = displayTitle,

@@ -374,6 +374,15 @@
     <string name="pref_about_donate_upi">UPI</string>
     <string name="pref_about_donate_upi_id" translatable="false">aadiinarvekar@upi</string>
 
+    <string name="pref_about_telegram_title">Telegram</string>
+    <string name="pref_about_telegram_channel">Telegram Channel</string>
+    <string name="pref_about_telegram_channel_summary">Join our channel for updates and news</string>
+    <string name="pref_about_telegram_group">Telegram Chat Group</string>
+    <string name="pref_about_telegram_group_summary">Discuss and chat with the community</string>
+    <string name="pref_about_show_community_icon_title">Community Shortcut</string>
+    <string name="pref_about_show_community_icon_summary">Show community links shortcut in the home header</string>
+    <string name="pref_about_telegram_url" translatable="false">https://t.me/mpvX</string>
+    <string name="pref_about_telegram_chat_url" translatable="false">https://t.me/mpvX_chat</string>
 
     <string name="player_sheets_add_ext_sub">Add external subtitles</string>
     <string name="player_sheets_add_ext_audio">Add external audio tracks</string>

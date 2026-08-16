@@ -365,6 +365,15 @@
     <string name="pref_about_donate_upi">UPI</string>
     <string name="pref_about_donate_upi_id" translatable="false">aadiinarvekar@upi</string>
 
+    <string name="pref_about_telegram_title">电报社群</string>
+    <string name="pref_about_telegram_channel">电报通知频道</string>
+    <string name="pref_about_telegram_channel_summary">加入频道获取版本更新与资讯</string>
+    <string name="pref_about_telegram_group">电报交流群</string>
+    <string name="pref_about_telegram_group_summary">和其他用户交流讨论</string>
+    <string name="pref_about_show_community_icon_title">社群快捷入口</string>
+    <string name="pref_about_show_community_icon_summary">在首页顶部显示社群链接图标</string>
+    <string name="pref_about_telegram_url" translatable="false">https://t.me/mpvX</string>
+    <string name="pref_about_telegram_chat_url" translatable="false">https://t.me/mpvX_chat</string>
 
     <string name="player_sheets_add_ext_sub">加载外部字幕</string>
     <string name="player_sheets_add_ext_audio">加载外置音轨</string>
