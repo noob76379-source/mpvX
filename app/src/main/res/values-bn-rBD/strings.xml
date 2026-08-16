@@ -25,8 +25,6 @@
     <string name="pref_preferences">পছন্দসমূহ</string>
     <string name="pref_appearance_title">রূপ</string>
     <string name="pref_appearance_category_bottom_nav">নিচের নেভিগেশন ট্যাবস</string>
-    <string name="pref_appearance_tab_shorts_title">রেক্সশর্ট</string>
-    <string name="pref_appearance_tab_shorts_summary">হাই-টেম্পো উল্লম্ব ভিডিও ফিড টগল করুন</string>
     <string name="pref_appearance_tab_recents_title">সম্প্রতি দেখা হয়েছে</string>
     <string name="pref_appearance_material_you_summary">ডাইনামিক কালার সক্রিয় করুন</string>
     <string name="pref_appearance_material_you_summary_disabled">শুধুমাত্র Android 12 এবং তার উপরে উপলব্ধ</string>
@@ -322,13 +320,6 @@
     <string name="pref_about_donate_paypal">পেপ্যাল</string>
     <string name="pref_about_donate_paypal_summary">পেপ্যালে ডেভেলপারকে সমর্থন করুন</string>
     <string name="pref_about_donate_upi">UPI</string>
-    <string name="pref_about_telegram_title">টেলিগ্রাম</string>
-    <string name="pref_about_telegram_channel">টেলিগ্রাম চ্যানেল</string>
-    <string name="pref_about_telegram_channel_summary">আপডেট এবং খবরের জন্য আমাদের চ্যানেলে যোগ দিন</string>
-    <string name="pref_about_telegram_group">টেলিগ্রাম চ্যাট গ্রুপ</string>
-    <string name="pref_about_telegram_group_summary">কমিউনিটির সাথে আলোচনা করুন এবং চ্যাট করুন</string>
-    <string name="pref_about_show_community_icon_title">কমিউনিটি শর্টকাট</string>
-    <string name="pref_about_show_community_icon_summary">হোম হেডারে কমিউনিটি লিঙ্ক শর্টকাট দেখান</string>
     <string name="player_sheets_add_ext_sub">বাহ্যিক সাবটাইটেল যোগ করুন</string>
     <string name="player_sheets_add_ext_audio">বাহ্যিক অডিও ট্র্যাক যোগ করুন</string>
     <string name="player_sheets_tracks_off">বন্ধ</string>

@@ -91,7 +91,7 @@ export function HeroSection({
           className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight mb-6"
         >
           <span className="bg-clip-text text-transparent bg-linear-to-b from-foreground to-foreground/60">
-            mpvExtended
+            mpvX
           </span>
         </motion.h1>
 

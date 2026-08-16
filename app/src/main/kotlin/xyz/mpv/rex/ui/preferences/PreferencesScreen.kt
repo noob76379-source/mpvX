@@ -308,33 +308,6 @@ object PreferencesScreen : Screen {
             }
           }
 
-          // RexShorts Section
-          item {
-            PreferenceSectionHeader(title = stringResource(R.string.pref_category_rexshorts))
-          }
-
-          item {
-            PreferenceCard {
-              Preference(
-                title = { Text(text = stringResource(R.string.pref_category_rexshorts_settings)) },
-                summary = {
-                  Text(
-                    text = stringResource(R.string.pref_category_rexshorts_settings_desc),
-                    color = MaterialTheme.colorScheme.outline
-                  )
-                },
-                icon = {
-                  Icon(
-                    Icons.Outlined.VideoLibrary,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
-                  )
-                },
-                onClick = { backstack.add(ShortsPreferencesScreen) },
-              )
-            }
-          }
-          
           // Advanced & About Section
           item {
             PreferenceSectionHeader(title = stringResource(R.string.pref_category_advanced_about))

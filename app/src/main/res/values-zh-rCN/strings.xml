@@ -14,8 +14,6 @@
     <string name="pref_appearance_category_bottom_nav">底部导航标签</string>
     <string name="pref_appearance_tab_home_title">首页/文件</string>
     <string name="pref_appearance_tab_home_summary">显示本地文件夹与文件浏览器</string>
-    <string name="pref_appearance_tab_shorts_title">RexShorts</string>
-    <string name="pref_appearance_tab_shorts_summary">开启竖屏短视频信息流</string>
     <string name="pref_appearance_tab_recents_title">最近播放</string>
     <string name="pref_appearance_tab_recents_summary">快速继续上次播放的视频</string>
     <string name="pref_appearance_tab_playlists_title">播放列表</string>
@@ -897,9 +895,6 @@
     <string name="folders_count">文件夹（%1$d）</string>
     <string name="media_count">媒体（%1$d）</string>
     <string name="drag_to_reorder">拖动调整顺序</string>
-    <string name="community_links">社区链接</string>
-    <string name="community_hub">社区中心</string>
-    <string name="connect_social_media">前往社交平台关注我们</string>
 
     <!-- Sort Dialog Strings -->
     <string name="sort_and_view_options">排序与视图设置</string>
@@ -910,37 +905,9 @@
     <string name="pref_category_playback_controls">播放与控制</string>
     <string name="pref_category_file_management">文件管理</string>
     <string name="pref_category_media_settings">媒体设置</string>
-    <string name="pref_category_rexshorts">RexShorts</string>
-    <string name="pref_category_rexshorts_settings">RexShorts 设置</string>
-    <string name="pref_category_rexshorts_settings_desc">开关功能、随机播放与黑名单内容管理</string>
     <string name="pref_category_advanced_about">高级设置与关于</string>
 
-    <!-- Shorts preference screen -->
-    <string name="pref_enable_rexshorts">启用 RexShorts</string>
-    <string name="pref_enable_rexshorts_summary">在底部导航栏显示短视频标签页</string>
-    <string name="pref_auto_swipe_shorts">自动切换下一条短视频</string>
-    <string name="pref_auto_swipe_shorts_summary">当前视频播放完毕后自动滑动切换下一条</string>
-    <string name="pref_enable_glass_shorts_controls">磨砂玻璃短视频控制栏</string>
-    <string name="pref_enable_glass_shorts_controls_summary">为短视频操作按钮启用毛玻璃拟态样式</string>
-    <string name="pref_show_shorts_back_button">显示返回按钮</string>
-    <string name="pref_show_shorts_back_button_summary">在短视频侧边控制面板展示返回按钮</string>
-    <string name="pref_category_discovery">内容发现</string>
-    <string name="pref_include_short_horizontal_videos">纳入横向短视频</string>
-    <string name="pref_include_short_horizontal_videos_summary">短视频信息流中展示时长较短的横版视频</string>
-    <string name="pref_max_horizontal_video_duration">横版视频最大时长</string>
-    <plurals name="pref_max_horizontal_video_duration_desc">
-        <item quantity="one">横版视频时长上限：%d 分钟</item>
-        <item quantity="other">横版视频时长上限：%d 分钟</item>
-    </plurals>
-    <string name="pref_sourced_folders">素材来源文件夹</string>
-    <string name="pref_sourced_folders_all">素材取自全部扫描目录</string>
-    <string name="pref_sourced_folders_count">素材取自 %1$d 个文件夹</string>
-    <string name="pref_sourced_folders_list">来源目录：%1$s</string>
-    <string name="pref_category_content_management">内容管理</string>
     <string name="pref_blocked_videos">黑名单视频</string>
-    <string name="pref_blocked_videos_summary">查看与管理屏蔽的短视频</string>
-    <string name="pref_select_sourced_folders">选择素材来源文件夹</string>
-    <string name="pref_select_sourced_folders_desc">选取用于扫描短视频的目录。若未选择，将扫描全部文件夹。</string>
 
     <!-- Update features -->
     <string name="pref_category_updates">更新</string>
