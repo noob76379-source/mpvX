@@ -6,11 +6,16 @@ This file records the upstream projects that are explicitly credited by mpvX. It
 
 | Project | License | Source | License text |
 |---|---|---|---|
+| mpvRex | Apache-2.0 | https://github.com/sfsakhawat999/mpvRex | https://github.com/sfsakhawat999/mpvRex/blob/master/LICENSE |
 | mpvEx | Apache-2.0 | https://github.com/marlboro-advance/mpvEx | https://github.com/marlboro-advance/mpvEx/blob/master/LICENSE |
 | mpv-android | MIT | https://github.com/mpv-android/mpv-android | https://github.com/mpv-android/mpv-android/blob/master/LICENSE |
 | mpvKt | Apache-2.0 | https://github.com/abdallahmehiz/mpvKt | https://github.com/abdallahmehiz/mpvKt/blob/main/LICENSE |
 | Next Player | GPL-3.0 | https://github.com/anilbeesetti/nextplayer | https://github.com/anilbeesetti/nextplayer/blob/main/LICENSE |
 | Gramophone | GPL-3.0 | https://github.com/FoedusProgramme/Gramophone | https://github.com/FoedusProgramme/Gramophone |
+
+## mpvX upstream relationship
+
+mpvX is a fork/derivative of **mpvRex**. mpvRex itself describes its roots as coming from **mpvEx**, which in turn builds on **mpv-android**. The upstream projects remain credited separately, and their applicable license terms continue to apply to any code or assets derived from them.
 
 ## Important
 
