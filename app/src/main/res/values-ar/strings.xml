@@ -14,8 +14,6 @@
     <string name="pref_appearance_category_bottom_nav">تبويبات شريط التنقل السفلي</string>
     <string name="pref_appearance_tab_home_title">الرئيسية / الملفات</string>
     <string name="pref_appearance_tab_home_summary">عرض المجلدات المحلية ومستعرض الملفات</string>
-    <string name="pref_appearance_tab_shorts_title">XShorts</string>
-    <string name="pref_appearance_tab_shorts_summary">تبديل تدفقات الفيديو الرأسي السريعة</string>
     <string name="pref_appearance_tab_recents_title">المشغَّل مؤخراً</string>
     <string name="pref_appearance_tab_recents_summary">استئناف جلسات الفيديو السابقة بسرعة</string>
     <string name="pref_appearance_tab_playlists_title">قوائم التشغيل</string>
@@ -803,35 +801,8 @@
     <string name="pref_category_playback_controls">التشغيل والتحكم</string>
     <string name="pref_category_file_management">إدارة الملفات</string>
     <string name="pref_category_media_settings">إعدادات الوسائط</string>
-    <string name="pref_category_rexshorts">ريكس شورتس</string>
-    <string name="pref_category_rexshorts_settings">إعدادات XShorts</string>
-    <string name="pref_category_rexshorts_settings_desc">إدارة التفعيل والتعطيل والتشغيل العشوائي والمحتوى المحجوب</string>
     <string name="pref_category_advanced_about">المتقدمة وحول التطبيق</string>
-    <string name="pref_enable_rexshorts">تفعيل ريكس شورتس</string>
-    <string name="pref_enable_rexshorts_summary">إظهار تبويب المقاطع القصيرة في شريط التنقل السفلي</string>
-    <string name="pref_auto_swipe_shorts">التمرير التلقائي للمقطع القصير التالي</string>
-    <string name="pref_auto_swipe_shorts_summary">التمرير تلقائياً إلى المقطع القصير التالي عند انتهاء المقطع الحالي</string>
-    <string name="pref_category_discovery">الاستكشاف</string>
-    <string name="pref_include_short_horizontal_videos">تضمين الفيديوهات العادية</string>
-    <string name="pref_include_short_horizontal_videos_summary">إظهار الفيديوهات العادية أيضا في التغذية إذا كانت قصيرة المدة</string>
-    <string name="pref_max_horizontal_video_duration">الحد الأقصى لمدة الفيديوهات الأفقية</string>
-    <plurals name="pref_max_horizontal_video_duration_desc">
-        <item quantity="zero">تقييد الفيديوهات الأفقية إلى %d دقيقة</item>
-        <item quantity="one">تقييد الفيديوهات الأفقية إلى دقيقة واحدة</item>
-        <item quantity="two">تقييد الفيديوهات الأفقية إلى دقيقتين</item>
-        <item quantity="few">تقييد الفيديوهات الأفقية إلى %d دقائق</item>
-        <item quantity="many">تقييد الفيديوهات الأفقية إلى %d دقيقة</item>
-        <item quantity="other">تقييد الفيديوهات الأفقية إلى %d دقيقة</item>
-    </plurals>
-    <string name="pref_sourced_folders">المجلدات المصدرية</string>
-    <string name="pref_sourced_folders_all">مصدرها جميع المجلدات المفحوصة</string>
-    <string name="pref_sourced_folders_count">مصدرها %1$d مجلد/مجلدات</string>
-    <string name="pref_sourced_folders_list">المصدر: %1$s</string>
-    <string name="pref_category_content_management">إدارة المحتوى</string>
     <string name="pref_blocked_videos">الفيديوهات المحظورة</string>
-    <string name="pref_blocked_videos_summary">عرض وإدارة المقاطع القصيرة المحظورة</string>
-    <string name="pref_select_sourced_folders">اختيار المجلدات المصدر</string>
-    <string name="pref_select_sourced_folders_desc">اختر المجلدات التي يتم جلب المقاطع القصيرة منها. إذا لم يتم اختيار أي مجلد، سيتم جلبها من جميع المجلدات.</string>
     <string name="pref_category_updates">التحديثات</string>
     <string name="pref_about_auto_check_updates">التحقق التلقائي من التحديثات</string>
     <string name="pref_about_auto_check_updates_summary">التحقق من الإصدارات الجديدة عند بدء التشغيل</string>
@@ -1017,10 +988,6 @@
     <string name="player_sheets_aspect_ratio_reset_advanced_zoom">إعادة تعيين التكبير المتقدم</string>
     <string name="mark_as_new">جديد</string>
     <string name="mark_as_new_desc">إزالة جميع العلامات والوسم كجديد</string>
-    <string name="pref_enable_glass_shorts_controls">عناصر التحكم زجاجية للمقاطع القصيرة</string>
-    <string name="pref_enable_glass_shorts_controls_summary">تطبيق نمط الزجاج Glass-morphism على أزرار التحكم في المقاطع القصيرة</string>
-    <string name="pref_show_shorts_back_button">إظهار زر الرجوع</string>
-    <string name="pref_show_shorts_back_button_summary">إظهار زر الرجوع في لوحة التحكم الجانبية للمقاطع القصيرة</string>
 
     <string name="item_type_video">فيديو</string>
     <string name="item_type_folder">مجلد</string>

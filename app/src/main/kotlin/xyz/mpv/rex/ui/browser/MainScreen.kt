@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.PlaylistPlay
-import androidx.compose.material.icons.outlined.VideoLibrary
 import androidx.compose.material.icons.filled.History
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Language
@@ -40,7 +39,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
@@ -53,7 +51,6 @@ import xyz.mpv.rex.ui.browser.folderlist.FolderListScreen
 import xyz.mpv.rex.ui.browser.networkstreaming.NetworkStreamingScreen
 import xyz.mpv.rex.ui.browser.playlist.PlaylistScreen
 import xyz.mpv.rex.ui.browser.recentlyplayed.RecentlyPlayedScreen
-import xyz.mpv.rex.ui.browser.shorts.ShortsScreen
 import xyz.mpv.rex.ui.browser.selection.SelectionManager
 import xyz.mpv.rex.ui.browser.miniplayer.MiniPlayer
 import xyz.mpv.rex.ui.browser.miniplayer.MiniPlayerStateManager
@@ -161,20 +158,18 @@ object MainScreen : Screen {
     val browserPreferences = koinInject<BrowserPreferences>()
     val miniPlayerStateManager = koinInject<MiniPlayerStateManager>()
     val miniPlayerState by miniPlayerStateManager.state.collectAsState()
-    val isShortsEnabled by browserPreferences.enableShorts.collectAsState()
     val enableTabRecents by browserPreferences.enableTabRecents.collectAsState()
     val enableTabPlaylists by browserPreferences.enableTabPlaylists.collectAsState()
     val enableTabNetwork by browserPreferences.enableTabNetwork.collectAsState()
 
     val homeLabel = stringResource(R.string.home)
-    val shortsLabel = stringResource(R.string.shorts)
     val recentsLabel = stringResource(R.string.recents)
     val playlistsLabel = stringResource(R.string.playlists)
     val networkLabel = stringResource(R.string.network)
 
     val visibleTabs = remember(
-      isShortsEnabled, enableTabRecents, enableTabPlaylists, enableTabNetwork,
-      homeLabel, shortsLabel, recentsLabel, playlistsLabel, networkLabel
+      enableTabRecents, enableTabPlaylists, enableTabNetwork,
+      homeLabel, recentsLabel, playlistsLabel, networkLabel
     ) {
       buildList {
         add(
@@ -182,13 +177,6 @@ object MainScreen : Screen {
             FolderListScreen.Content()
           }
         )
-        if (isShortsEnabled) {
-          add(
-            VisibleTab("shorts", shortsLabel, Icons.Outlined.VideoLibrary) {
-              ShortsScreen().Content()
-            }
-          )
-        }
         if (enableTabRecents) {
           add(
             VisibleTab("recents", recentsLabel, Icons.Filled.History) {
@@ -220,12 +208,6 @@ object MainScreen : Screen {
       }
     }
 
-    // Intercept back button when on Shorts tab to return to previous tab
-    val shortsIdx = visibleTabs.indexOfFirst { it.id == "shorts" }
-    androidx.activity.compose.BackHandler(enabled = shortsIdx != -1 && selectedTab == shortsIdx) {
-      selectedTab = previousTab
-    }
-
     // Shared state (across the app) collected reactively via StateFlow
     val isInSelectionMode by _isInSelectionModeShared.collectAsState()
     val hideNavigationBar by _shouldHideNavigationBar.collectAsState()
@@ -254,12 +236,8 @@ object MainScreen : Screen {
       modifier = Modifier.fillMaxSize(),
       bottomBar = {
         // Animated bottom navigation bar with slide animations
-        // Also hide if Shorts tab is active (index 1 when enabled, index -1 when disabled)
-        val shortsIdx = visibleTabs.indexOfFirst { it.id == "shorts" }
-        val isShortsTabActive = isShortsEnabled && shortsIdx != -1 && selectedTab == shortsIdx
-        
         AnimatedVisibility(
-            visible = !hideNavigationBar && !isShortsTabActive && visibleTabs.size > 1,
+            visible = !hideNavigationBar && visibleTabs.size > 1,
             enter = slideInVertically(
               animationSpec = tween(durationMillis = 300),
               initialOffsetY = { fullHeight -> fullHeight }
@@ -279,20 +257,10 @@ object MainScreen : Screen {
                     bottomEnd = 0.dp
                   )
                 ),
-              containerColor = if (isShortsTabActive) Color.Transparent else NavigationBarDefaults.containerColor,
-              contentColor = if (isShortsTabActive) Color.White else MaterialTheme.colorScheme.onSurface,
+              containerColor = NavigationBarDefaults.containerColor,
+              contentColor = MaterialTheme.colorScheme.onSurface,
             ) {
-              val itemColors = if (isShortsTabActive) {
-                NavigationBarItemDefaults.colors(
-                  selectedIconColor = Color.White,
-                  selectedTextColor = Color.White,
-                  unselectedIconColor = Color.White.copy(alpha = 0.7f),
-                  unselectedTextColor = Color.White.copy(alpha = 0.7f),
-                  indicatorColor = Color.White.copy(alpha = 0.2f)
-                )
-              } else {
-                NavigationBarItemDefaults.colors()
-              }
+              val itemColors = NavigationBarItemDefaults.colors()
 
               visibleTabs.forEachIndexed { index, tab ->
                 NavigationBarItem(
@@ -374,9 +342,7 @@ object MainScreen : Screen {
           },
           label = "tab_animation"
         ) { targetTab ->
-          val shortsIdx = visibleTabs.indexOfFirst { it.id == "shorts" }
-          val isShortsTabActive = isShortsEnabled && shortsIdx != -1 && selectedTab == shortsIdx
-          val isNavBarVisible = !hideNavigationBar && !isShortsTabActive && visibleTabs.size > 1
+          val isNavBarVisible = !hideNavigationBar && visibleTabs.size > 1
           
           val navBarHeight = if (isNavBarVisible) fabBottomPadding else 0.dp
           val miniPlayerHeight = if (miniPlayerState.isPlaybackActive) 72.dp else 0.dp

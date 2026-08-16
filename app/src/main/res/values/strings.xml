@@ -17,8 +17,6 @@
     <string name="pref_appearance_category_bottom_nav">Bottom Navigation Tabs</string>
     <string name="pref_appearance_tab_home_title">Home / Files</string>
     <string name="pref_appearance_tab_home_summary">Show local folders &amp; file explorer</string>
-    <string name="pref_appearance_tab_shorts_title">XShorts</string>
-    <string name="pref_appearance_tab_shorts_summary">Toggle high-tempo vertical video feeds</string>
     <string name="pref_appearance_tab_recents_title">Recently Played</string>
     <string name="pref_appearance_tab_recents_summary">Quickly resume previous video sessions</string>
     <string name="pref_appearance_tab_playlists_title">Playlists</string>
@@ -934,37 +932,9 @@
     <string name="pref_category_playback_controls">Playback &amp; Controls</string>
     <string name="pref_category_file_management">File Management</string>
     <string name="pref_category_media_settings">Media Settings</string>
-    <string name="pref_category_rexshorts">XShorts</string>
-    <string name="pref_category_rexshorts_settings">XShorts Settings</string>
-    <string name="pref_category_rexshorts_settings_desc">Manage enable/disable, shuffle, and blocked content</string>
     <string name="pref_category_advanced_about">Advanced &amp; About</string>
 
-    <!-- Shorts preference screen -->
-    <string name="pref_enable_rexshorts">Enable XShorts</string>
-    <string name="pref_enable_rexshorts_summary">Show the Shorts tab in the bottom navigation bar</string>
-    <string name="pref_auto_swipe_shorts">Auto Swipe to Next Short</string>
-    <string name="pref_auto_swipe_shorts_summary">Automatically swipe to the next short when current one ends</string>
-    <string name="pref_enable_glass_shorts_controls">Glass shorts controls</string>
-    <string name="pref_enable_glass_shorts_controls_summary">Apply glass-morphism style to shorts action buttons</string>
-    <string name="pref_show_shorts_back_button">Show back button</string>
-    <string name="pref_show_shorts_back_button_summary">Show the back button in the shorts side control panel</string>
-    <string name="pref_category_discovery">Discovery</string>
-    <string name="pref_include_short_horizontal_videos">Include Short Normal Videos</string>
-    <string name="pref_include_short_horizontal_videos_summary">Show horizontal videos in the feed if they are short</string>
-    <string name="pref_max_horizontal_video_duration">Max Horizontal Duration</string>
-    <plurals name="pref_max_horizontal_video_duration_desc">
-        <item quantity="one">Limit horizontal videos to %d minute</item>
-        <item quantity="other">Limit horizontal videos to %d minutes</item>
-    </plurals>
-    <string name="pref_sourced_folders">Sourced Folders</string>
-    <string name="pref_sourced_folders_all">Sourced from all scanned directories</string>
-    <string name="pref_sourced_folders_count">Sourced from %1$d folder(s)</string>
-    <string name="pref_sourced_folders_list">Sourced from: %1$s</string>
-    <string name="pref_category_content_management">Content Management</string>
     <string name="pref_blocked_videos">Blocked Videos</string>
-    <string name="pref_blocked_videos_summary">View and manage blocked shorts</string>
-    <string name="pref_select_sourced_folders">Select Sourced Folders</string>
-    <string name="pref_select_sourced_folders_desc">Choose directories to source shorts from. If none are selected, shorts will be sourced from all folders.</string>
 
     <!-- Update features -->
     <string name="pref_category_updates">Updates</string>

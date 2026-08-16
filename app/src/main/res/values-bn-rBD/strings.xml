@@ -25,8 +25,6 @@
     <string name="pref_preferences">পছন্দসমূহ</string>
     <string name="pref_appearance_title">রূপ</string>
     <string name="pref_appearance_category_bottom_nav">নিচের নেভিগেশন ট্যাবস</string>
-    <string name="pref_appearance_tab_shorts_title">রেক্সশর্ট</string>
-    <string name="pref_appearance_tab_shorts_summary">হাই-টেম্পো উল্লম্ব ভিডিও ফিড টগল করুন</string>
     <string name="pref_appearance_tab_recents_title">সম্প্রতি দেখা হয়েছে</string>
     <string name="pref_appearance_material_you_summary">ডাইনামিক কালার সক্রিয় করুন</string>
     <string name="pref_appearance_material_you_summary_disabled">শুধুমাত্র Android 12 এবং তার উপরে উপলব্ধ</string>
