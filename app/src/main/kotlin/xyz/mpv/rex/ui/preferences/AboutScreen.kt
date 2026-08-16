@@ -306,6 +306,30 @@ object AboutScreen : Screen {
           )
         }
 
+        Spacer(Modifier.height(20.dp))
+
+        Column(
+          modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+          horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+          AndroidView(
+            modifier = Modifier.fillMaxWidth().height(300.dp),
+            factory = { ctx ->
+              ImageView(ctx).apply {
+                setImageResource(R.drawable.tuff_blud)
+                scaleType = ImageView.ScaleType.CENTER_CROP
+              }
+            },
+          )
+          Spacer(Modifier.height(12.dp))
+          Text(
+            text = "App by Tuff Blud",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
+            color = MaterialTheme.colorScheme.primary,
+          )
+        }
+
         Spacer(Modifier.height(xyz.mpv.rex.ui.browser.LocalNavigationBarHeight.current + 16.dp))
         }
       }
