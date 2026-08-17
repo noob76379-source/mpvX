@@ -243,14 +243,14 @@ class MainActivity : ComponentActivity() {
           },
           predictivePopTransitionSpec = {
             (
-              fadeIn(animationSpec = tween(220, delayMillis = 30)) +
+              fadeIn(animationSpec = tween(220)) +
                 scaleIn(
                   animationSpec = tween(220, delayMillis = 30),
                   initialScale = .9f,
                   TransformOrigin(-1f, .5f),
                 )
             ) togetherWith (
-                fadeOut(animationSpec = tween(220, delayMillis = 30)) +
+                fadeOut(animationSpec = tween(220)) +
                   scaleOut(
                     animationSpec = tween(220, delayMillis = 30),
                     targetScale = .9f,
