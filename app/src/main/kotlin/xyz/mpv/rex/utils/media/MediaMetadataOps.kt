@@ -17,9 +17,6 @@ import org.koin.core.context.GlobalContext
 object MediaMetadataOps {
     private const val TAG = "MediaMetadataOps"
 
-    /**
-     * Scans and maps all folders containing media into [VideoFolder] domain objects.
-     */
     suspend fun getAllMediaFolders(context: Context): List<VideoFolder> =
         withContext(Dispatchers.IO) {
             try {
@@ -27,14 +24,14 @@ object MediaMetadataOps {
                 val browserPreferences = koin.get<BrowserPreferences>()
                 val appearancePreferences = koin.get<AppearancePreferences>()
                 val playbackStateRepository = koin.get<PlaybackStateRepository>()
-                
+
                 val isAudioEnabled = browserPreferences.showAudioFiles.get()
                 val playbackStates = playbackStateRepository.getAllPlaybackStates()
                 val thresholdDays = appearancePreferences.unplayedOldVideoDays.get()
-                
+
                 val foldersPreferences = koin.get<xyz.mpv.rex.preferences.FoldersPreferences>()
                 val blacklistedFolders = foldersPreferences.blacklistedFolders.get()
-                
+
                 val hybridIndex = koin.get<HybridMediaIndexRepository>()
                 hybridIndex.ensureFreshIfEmpty()
                 val folders = hybridIndex.getFlatFolders(
@@ -42,19 +39,35 @@ object MediaMetadataOps {
                     thresholdDays = thresholdDays,
                     watchedThreshold = browserPreferences.watchedThreshold.get(),
                 )
+
                 folders
-                    .filter { folder -> 
+                    .filter { folder ->
                         (isAudioEnabled || folder.videoCount > 0) && folder.path !in blacklistedFolders
                     }
                     .map { folder ->
-                        // A watched video must never remain in the folder's NEW badge.
-                        // The index can still report it as new when its old playback
-                        // state has timeRemaining == -1, so remove watched states that
-                        // belong to this folder from the displayed new count.
+                        // Folder NEW count must be based on the current watched state.
+                        // PlaybackStateEntity.mediaTitle is not guaranteed to be a full path,
+                        // so match the state against the folder using several stable forms.
                         val watchedInFolder = playbackStates.count { state ->
-                            state.hasBeenWatched &&
-                                java.io.File(state.mediaTitle).parent == folder.path
+                            if (!state.hasBeenWatched) return@count false
+
+                            val title = state.mediaTitle.trim()
+                            if (title.isEmpty()) return@count false
+
+                            val file = java.io.File(title)
+                            val parent = file.parent?.trimEnd(java.io.File.separatorChar)
+                            val folderPath = folder.path.trimEnd(java.io.File.separatorChar)
+                            val fileName = file.name
+                            val titleWithoutExtension = fileName.substringBeforeLast('.', fileName)
+
+                            parent == folderPath ||
+                                fileName.equals(title, ignoreCase = true) ||
+                                java.io.File(folderPath, fileName).exists() ||
+                                java.io.File(folderPath, title).exists() ||
+                                folder.name.equals(title, ignoreCase = true) ||
+                                folder.name.equals(titleWithoutExtension, ignoreCase = true)
                         }
+
                         VideoFolder(
                             bucketId = folder.id,
                             name = folder.name,
