@@ -430,7 +430,7 @@ fun UpdateDialog(
 
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = stringResource(R.string.update_release_notes),
+                        text = "What's New",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.primary
                     )
