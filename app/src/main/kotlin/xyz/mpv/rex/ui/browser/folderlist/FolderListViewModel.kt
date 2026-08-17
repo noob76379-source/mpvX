@@ -24,9 +24,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
-import xyz.mpv.rex.domain.recentlyplayed.repository.RecentlyPlayedRepository
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -45,7 +46,7 @@ class FolderListViewModel(
   private val foldersPreferences: FoldersPreferences by inject()
   private val appearancePreferences: AppearancePreferences by inject()
   private val browserPreferences: xyz.mpv.rex.preferences.BrowserPreferences by inject()
-  private val recentlyPlayedRepository: RecentlyPlayedRepository by inject()
+  private val recentlyPlayedRepository: xyz.mpv.rex.domain.recentlyplayed.repository.RecentlyPlayedRepository by inject()
   private val hybridMediaIndex: HybridMediaIndexRepository by inject()
 
   private val _allVideoFolders = MutableStateFlow<List<VideoFolder>>(emptyList())
@@ -96,27 +97,45 @@ class FolderListViewModel(
     val hasCachedData = loadCachedFolders()
 
     if (hasCachedData) {
-      // If we have cached data, show it immediately and refresh silently in background
+      // If we have cache, show it immediately and refresh silently in background
       _hasCompletedInitialLoad.value = true
       _isLoading.value = false
       viewModelScope.launch(Dispatchers.IO) {
-        loadData() 
+        loadData()
       }
     } else {
       // No cache, must show scanning UI
       loadData()
     }
 
-    // Note: BaseBrowserViewModel handles MediaLibraryEvents.changes and playback state observation centrally.
+    // Refresh folder NEW counts when a video becomes watched.
+    // FolderListViewModel previously had no playback-state observer, so the
+    // cached/newCount value could remain visible until a manual media refresh.
+    viewModelScope.launch {
+      playbackStateRepository
+        .observeAllPlaybackStates()
+        .map { states ->
+          states
+            .filter { it.hasBeenWatched }
+            .map { it.mediaTitle }
+            .toSet()
+        }
+        .distinctUntilChanged()
+        .drop(1)
+        .collectLatest {
+          currentScanJob?.join()
+          loadData()
+        }
+    }
 
     // Filter folders based on blacklist and audio visibility
     viewModelScope.launch {
       combine(
-        _allVideoFolders, 
+        _allVideoFolders,
         foldersPreferences.blacklistedFolders.changes(),
         browserPreferences.showAudioFiles.changes()
       ) { folders, blacklist, showAudio ->
-        folders.filter { folder -> 
+        folders.filter { folder ->
           folder.path !in blacklist && (showAudio || folder.videoCount > 0)
         }
       }.collectLatest { filteredFolders ->
@@ -133,10 +152,10 @@ class FolderListViewModel(
         previousFolderCount = filteredFolders.size
 
         _videoFolders.value = filteredFolders
-        
+
         // Map to FolderWithNewCount using the pre-calculated newCount from repository
-        _foldersWithNewCount.value = filteredFolders.map { 
-          FolderWithNewCount(it, it.newCount) 
+        _foldersWithNewCount.value = filteredFolders.map {
+          FolderWithNewCount(it, it.newCount)
         }
 
         // Save to cache for next app launch (save unfiltered list)
@@ -238,10 +257,10 @@ class FolderListViewModel(
         if (isFirstLoad) {
           _isLoading.value = true
         }
-        
+
         val startTime = System.currentTimeMillis()
         var folders = MediaFileRepository.getAllVideoFolders(getApplication())
-        
+
         val scanTime = System.currentTimeMillis() - startTime
         Log.d(TAG, "Media scan completed in ${scanTime}ms, found ${folders.size} folders")
 
@@ -301,14 +320,14 @@ class FolderListViewModel(
         // Targeted deletion: Only delete media files in the immediate folder
         val children = dir.listFiles() ?: emptyArray()
         var filesDeleted = 0
-        
+
         children.forEach { file ->
           if (file.isDirectory) return@forEach // Never recurse into subfolders
-          
+
           val isVideo = FileTypeUtils.isVideoFile(file)
           val isSubtitle = FileTypeUtils.isSubtitleFile(file)
           val isAudio = showAudio && FileTypeUtils.isAudioFile(file)
-          
+
           if (isVideo || isSubtitle || isAudio) {
             if (file.delete()) {
               filesDeleted++
