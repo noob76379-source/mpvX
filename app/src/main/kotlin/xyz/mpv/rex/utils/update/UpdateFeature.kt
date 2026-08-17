@@ -86,18 +86,16 @@ class UpdateManager(
     private val json = Json { ignoreUnknownKeys = true }
 
     suspend fun checkForUpdate(forceShow: Boolean = false): Release? {
-        // Return null immediately if update feature is disabled (F-Droid flavor)
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return null
         }
         
-        val release = getLatestRelease("https://api.github.com/repos/sfsakhawat999/mpvX/releases/latest")
+        val release = getLatestRelease("https://api.github.com/repos/noob76379-source/mpvX/releases/latest")
         val currentVersion = BuildConfig.VERSION_NAME.replace("-dev", "")
         val remoteVersion = release.tagName.removePrefix("v")
         val prefs = context.getSharedPreferences("mpvEx_prefs", Context.MODE_PRIVATE)
         val ignoredVersion = prefs.getString("ignored_version", null)
 
-        // If this version was ignored, don't show it unless forced (manual check)
         if (!forceShow && ignoredVersion == remoteVersion) {
             return null
         }
@@ -110,7 +108,6 @@ class UpdateManager(
     }
 
     fun ignoreVersion(version: String) {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
@@ -144,7 +141,6 @@ class UpdateManager(
     }
 
     fun downloadUpdate(release: Release): Flow<Float> {
-        // Return completed flow immediately if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return flowOf(100f)
         }
@@ -159,7 +155,6 @@ class UpdateManager(
     private fun selectBestApkAsset(assets: List<Asset>): Asset? {
         val deviceArch = getDeviceArchitecture()
         
-        // First, try to find architecture-specific APK
         val archSpecificApk = assets.firstOrNull { asset ->
             asset.name.endsWith(".apk") && asset.name.contains(deviceArch, ignoreCase = true)
         }
@@ -168,7 +163,6 @@ class UpdateManager(
             return archSpecificApk
         }
         
-        // Fallback to universal APK
         val universalApk = assets.firstOrNull { asset ->
             asset.name.endsWith(".apk") && asset.name.contains("universal", ignoreCase = true)
         }
@@ -177,12 +171,10 @@ class UpdateManager(
             return universalApk
         }
         
-        // Last resort: any APK
         return assets.firstOrNull { it.name.endsWith(".apk") }
     }
 
     private fun getDeviceArchitecture(): String {
-        // Get the primary ABI (Application Binary Interface)
         val primaryAbi = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Build.SUPPORTED_ABIS[0]
         } else {
@@ -190,13 +182,12 @@ class UpdateManager(
             Build.CPU_ABI
         }
         
-        // Map Android ABI names to your APK naming convention
         return when (primaryAbi) {
             "arm64-v8a" -> "arm64-v8a"
             "armeabi-v7a" -> "armeabi-v7a"
             "x86" -> "x86"
             "x86_64" -> "x86_64"
-            else -> "universal" // Fallback for unknown architectures
+            else -> "universal"
         }
     }
 
@@ -221,12 +212,12 @@ class UpdateManager(
                 val progress = if (contentLength > 0) {
                     (totalBytesRead.toFloat() / contentLength.toFloat()) * 100
                 } else {
-                    -1f 
+                    -1f
                 }
                 emit(progress)
             }
             outputStream.flush()
-            emit(100f) 
+            emit(100f)
         } finally {
             inputStream.close()
             outputStream.close()
@@ -234,7 +225,6 @@ class UpdateManager(
     }.flowOn(Dispatchers.IO)
     
     fun getApkFile(release: Release): File? {
-        // Return null if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return null
         }
@@ -245,14 +235,13 @@ class UpdateManager(
     }
 
     fun clearCache() {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
         
-         context.externalCacheDir?.listFiles()?.forEach { 
-             if (it.name.endsWith(".apk")) it.delete()
-         }
+        context.externalCacheDir?.listFiles()?.forEach {
+            if (it.name.endsWith(".apk")) it.delete()
+        }
     }
 }
 
@@ -278,7 +267,6 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
     val isAutoUpdateEnabled: StateFlow<Boolean> = _isAutoUpdateEnabled.asStateFlow()
 
     fun toggleAutoUpdate(enabled: Boolean) {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
@@ -291,7 +279,6 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     init {
-        // Only initialize auto-update if feature is enabled
         if (BuildConfig.ENABLE_UPDATE_FEATURE && isAutoUpdateEnabled.value) {
             checkForUpdate(manual = false)
         }
@@ -311,7 +298,6 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun checkForUpdate(manual: Boolean = false) {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
@@ -322,11 +308,11 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
                 val release = updateManager.checkForUpdate(forceShow = manual)
                 if (release != null) {
                     val existingFile = updateManager.getApkFile(release)
-                     if (existingFile != null) {
-                         _updateState.value = UpdateState.ReadyToInstall(release)
-                     } else {
-                         _updateState.value = UpdateState.Available(release)
-                     }
+                    if (existingFile != null) {
+                        _updateState.value = UpdateState.ReadyToInstall(release)
+                    } else {
+                        _updateState.value = UpdateState.Available(release)
+                    }
                 } else {
                     if (manual) _updateState.value = UpdateState.NoUpdate
                     else _updateState.value = UpdateState.Idle
@@ -340,7 +326,6 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     fun downloadUpdate(release: Release) {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
@@ -352,17 +337,16 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
                     _downloadProgress.value = progress
                 }
                 _isDownloading.value = false
-                 _updateState.value = UpdateState.ReadyToInstall(release)
+                _updateState.value = UpdateState.ReadyToInstall(release)
             } catch (e: Exception) {
                 e.printStackTrace()
                 _isDownloading.value = false
-                _updateState.value = UpdateState.Error 
+                _updateState.value = UpdateState.Error
             }
         }
     }
 
     fun installUpdate(release: Release) {
-        // No-op if update feature is disabled
         if (!BuildConfig.ENABLE_UPDATE_FEATURE) {
             return
         }
@@ -383,7 +367,6 @@ class UpdateViewModel(application: Application) : AndroidViewModel(application) 
     }
     
     fun dismiss() {
-        // Clean up downloaded APK when user dismisses the dialog
         updateManager.clearCache()
         _updateState.value = UpdateState.Idle
     }
@@ -440,7 +423,6 @@ fun UpdateDialog(
                     .verticalScroll(rememberScrollState())
             ) {
                 if (actionLabel != "Install") {
-                    // Show version info for update available state
                     InfoRow(label = stringResource(R.string.update_current_version), value = currentVersion)
                     InfoRow(label = stringResource(R.string.update_latest_version), value = release.tagName.removePrefix("v"))
                     InfoRow(label = stringResource(R.string.update_release_date), value = formattedDate)
@@ -526,7 +508,6 @@ private fun InfoRow(label: String, value: String) {
 
 private fun formatDate(dateString: String): String {
     return try {
-        // GitHub API returns ISO 8601 format: "2024-01-15T10:30:00Z"
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US)
         inputFormat.timeZone = TimeZone.getTimeZone("UTC")
         val date = inputFormat.parse(dateString) ?: return dateString
