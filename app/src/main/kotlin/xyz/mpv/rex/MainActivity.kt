@@ -3,8 +3,8 @@ package xyz.mpv.rex
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.BackHandler
 import android.content.Intent
+import androidx.activity.compose.BackHandler
 import androidx.core.net.toUri
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.activity.ComponentActivity
@@ -243,14 +243,14 @@ class MainActivity : ComponentActivity() {
           },
           predictivePopTransitionSpec = {
             (
-              fadeIn(animationSpec = tween(220)) +
+              fadeIn(animationSpec = tween(220, delayMillis = 30)) +
                 scaleIn(
                   animationSpec = tween(220, delayMillis = 30),
                   initialScale = .9f,
                   TransformOrigin(-1f, .5f),
                 )
             ) togetherWith (
-                fadeOut(animationSpec = tween(220)) +
+                fadeOut(animationSpec = tween(220, delayMillis = 30)) +
                   scaleOut(
                     animationSpec = tween(220, delayMillis = 30),
                     targetScale = .9f,
