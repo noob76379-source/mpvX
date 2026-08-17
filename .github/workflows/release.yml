@@ -46,36 +46,45 @@ jobs:
           ls -lah "$RELEASE_DIR"
 
       - name: Sign APKs
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         run: |
-          set -e
+          set -euo pipefail
           RELEASE_DIR="app/build/outputs/apk/release"
-          
-          echo "${{ secrets.SIGNING_KEYSTORE }}" | base64 -d > release.keystore
-          
+          KEYSTORE="$RUNNER_TEMP/mpvX.jks"
+
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > "$KEYSTORE"
+
+          if [ ! -s "$KEYSTORE" ]; then
+            echo "Keystore was not decoded or is empty"
+            exit 1
+          fi
+
           APK_COUNT=$(find "$RELEASE_DIR" -name "app-*-release-unsigned.apk" -type f | wc -l)
           if [ "$APK_COUNT" -eq 0 ]; then
             echo "No unsigned APK files found"
             ls -lah "$RELEASE_DIR"
-            rm release.keystore
             exit 1
           fi
-          
+
           find "$RELEASE_DIR" -name "app-*-release-unsigned.apk" -type f | while read -r apk; do
             signed_apk="${apk/-unsigned/}"
-          
-            $ANDROID_HOME/build-tools/34.0.0/apksigner sign \
-              --ks release.keystore \
-              --ks-key-alias "${{ secrets.SIGNING_KEY_ALIAS }}" \
-              --ks-pass "pass:${{ secrets.SIGNING_STORE_PASSWORD }}" \
-              --key-pass "pass:${{ secrets.KEY_PASSWORD }}" \
+
+            "$ANDROID_HOME/build-tools/34.0.0/apksigner" sign \
+              --ks "$KEYSTORE" \
+              --ks-key-alias "$KEY_ALIAS" \
+              --ks-pass "pass:$KEYSTORE_PASSWORD" \
+              --key-pass "pass:$KEY_PASSWORD" \
               --out "$signed_apk" \
               "$apk"
-          
-            $ANDROID_HOME/build-tools/34.0.0/apksigner verify "$signed_apk"
+
+            "$ANDROID_HOME/build-tools/34.0.0/apksigner" verify "$signed_apk"
             rm "$apk"
           done
-          
-          rm release.keystore
+
+          rm -f "$KEYSTORE"
           ls -lh "$RELEASE_DIR"/app-*-release.apk
 
       - name: Copy build artifacts
@@ -94,7 +103,7 @@ jobs:
             varname="apk_${abi//-/_}_sha256"
             echo "$varname=$checksum" >> "$GITHUB_ENV"
           done
-          
+
           ls -lah mpvX-*.apk
 
       - name: Create GitHub Release
