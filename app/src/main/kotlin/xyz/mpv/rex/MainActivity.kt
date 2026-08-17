@@ -281,15 +281,8 @@ class MainActivity : ComponentActivity() {
               actionLabel = if (isDownloading) "Downloading..." else "Download",
               currentVersion = currentVersion,
               onDismiss = { updateViewModel.dismiss() },
-              onAction = { 
-                // Redirect to GitHub releases page as requested by user
-                context.startActivity(
-                  Intent(
-                    Intent.ACTION_VIEW, 
-                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvX/releases/latest").toUri()
-                  )
-                )
-                // updateViewModel.downloadUpdate(release) // Kept in code but disabled for now
+              onAction = {
+                updateViewModel.downloadUpdate(release)
               },
               onIgnore = { updateViewModel.ignoreVersion(release.tagName.removePrefix("v")) }
             )
@@ -303,15 +296,8 @@ class MainActivity : ComponentActivity() {
               actionLabel = "Install",
               currentVersion = currentVersion,
               onDismiss = { updateViewModel.dismiss() },
-              onAction = { 
-                // Redirect to GitHub releases page as requested by user
-                context.startActivity(
-                  Intent(
-                    Intent.ACTION_VIEW, 
-                    (release.htmlUrl ?: "https://github.com/sfsakhawat999/mpvX/releases/latest").toUri()
-                  )
-                )
-                // updateViewModel.installUpdate(release) // Kept in code but disabled for now
+              onAction = {
+                updateViewModel.installUpdate(release)
               },
               onIgnore = { updateViewModel.ignoreVersion(release.tagName.removePrefix("v")) }
             )
