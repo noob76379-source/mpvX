@@ -47,6 +47,14 @@ object MediaMetadataOps {
                         (isAudioEnabled || folder.videoCount > 0) && folder.path !in blacklistedFolders
                     }
                     .map { folder ->
+                        // A watched video must never remain in the folder's NEW badge.
+                        // The index can still report it as new when its old playback
+                        // state has timeRemaining == -1, so remove watched states that
+                        // belong to this folder from the displayed new count.
+                        val watchedInFolder = playbackStates.count { state ->
+                            state.hasBeenWatched &&
+                                java.io.File(state.mediaTitle).parent == folder.path
+                        }
                         VideoFolder(
                             bucketId = folder.id,
                             name = folder.name,
@@ -56,7 +64,7 @@ object MediaMetadataOps {
                             totalSize = folder.totalSize,
                             totalDuration = folder.totalDuration,
                             lastModified = folder.lastModified,
-                            newCount = folder.newCount,
+                            newCount = (folder.newCount - watchedInFolder).coerceAtLeast(0),
                             unwatchedVideoCount = folder.unwatchedVideoCount
                         )
                     }
