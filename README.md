@@ -1,46 +1,72 @@
+<div align="center">
+
+<img src="app/src/main/ic_launcher-playstore.png" width="120" height="120" alt="mpvX icon" />
+
 # mpvX
 
-<p align="center">
-  <img src="app/src/main/ic_launcher-playstore.png" width="128" height="128" alt="mpvX icon" />
+### A premium, powerful Android video player built around libmpv.
+
+<p>
+  <img src="https://img.shields.io/badge/Android-Modern-brightgreen?style=flat-square&logo=android" alt="Android" />
+  <img src="https://img.shields.io/badge/Powered%20by-libmpv-6f42c1?style=flat-square" alt="libmpv" />
+  <img src="https://img.shields.io/badge/Kotlin-2.3.10-7F52FF?style=flat-square&logo=kotlin&logoColor=white" alt="Kotlin" />
+  <img src="https://img.shields.io/badge/License-Apache%202.0-2ea44f?style=flat-square" alt="Apache 2.0" />
 </p>
 
-<h2 align="center">mpvX</h2>
-
-<p align="center">
-  A modern, powerful and customizable Android video player powered by libmpv.
+<p>
+  <a href="https://github.com/noob76379-source/mpvX/releases"><strong>Download</strong></a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="https://github.com/noob76379-source/mpvX/releases">Releases</a>
+  &nbsp;&nbsp;•&nbsp;&nbsp;
+  <a href="THIRD_PARTY_LICENSES.md">Licenses & Attribution</a>
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-Android-brightgreen.svg" alt="Android" />
-  <img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg" alt="Apache 2.0" />
-  <img src="https://img.shields.io/badge/Kotlin-2.3.10-purple.svg" alt="Kotlin" />
-</p>
-
-mpvX is built around a simple idea: **give you a fast video player that feels like your own.** It combines the power of **libmpv** with a modern Jetpack Compose interface, flexible controls, advanced file browsing, and a clean Android experience.
+</div>
 
 ---
 
-## Showcase
+## ✦ Built for people who care about playback
 
-<p align="center">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/glassplayer.png" width="92%" alt="mpvX player" />
-</p>
+mpvX is designed around one idea: **your video player should feel like yours.**
 
-<p align="center"><i>Player UI with glass-style controls</i></p>
+Under the hood, it combines the playback power of **libmpv** with a modern **Jetpack Compose** interface, advanced file browsing, flexible controls, network playback, and thoughtful customization.
 
-<p align="center">
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/videoscreen.png" width="31%" alt="Video browser" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/pip.png" width="31%" alt="Picture-in-picture" />
-  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/about.png" width="31%" alt="About screen" />
-</p>
+> **Fast. Clean. Flexible. Yours.**
 
-<p align="center"><i>Video browser · Picture-in-picture · About</i></p>
+## ◈ Showcase
+
+<div align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/glassplayer.png" width="92%" alt="mpvX premium player interface" />
+  <br />
+  <sub><i>Immersive player UI with glass-style controls</i></sub>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/videoscreen.png" width="30%" alt="mpvX video browser" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/pip.png" width="30%" alt="mpvX picture-in-picture" />
+  <img src="fastlane/metadata/android/en-US/images/phoneScreenshots/about.png" width="30%" alt="mpvX about screen" />
+</div>
+
+<p align="center"><sub>Video browser &nbsp;·&nbsp; Picture-in-picture &nbsp;·&nbsp; About</sub></p>
 
 ---
 
-## Features
+## ⚡ Highlights
 
-### Playback
+| Playback | Library | Experience |
+|:---|:---|:---|
+| **libmpv engine** | **Fast local browsing** | **Material You** |
+| Gesture controls | M3U playlists | Light / Dark / System |
+| Zoom & pan | WebDAV · SMB · FTP | Animated transitions |
+| A-B looping | Grid & list layouts | Custom navigation |
+| Frame-by-frame | Sorting & filtering | Per-video preferences |
+| HDR → SDR | Watched & flagged states | Smart orientation |
+| Subtitles & audio tracks | Cover-art thumbnails | Jetpack Compose |
+| Picture-in-picture | Multi-select | Clean, responsive UI |
+
+## 🎬 Playback
 
 - Powerful playback powered by **libmpv**
 - Custom double-tap seeking and gesture controls
@@ -52,11 +78,11 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 - Picture-in-picture playback
 - Shorts-style vertical video playback
 
-### Library & File Browser
+## 📁 Library & File Browser
 
 - Fast local video browsing
 - M3U playlist support
-- Network playback through WebDAV, SMB and FTP
+- Network playback through **WebDAV, SMB and FTP**
 - Grid and list layouts
 - Advanced sorting and filtering
 - Multi-select and range selection
@@ -64,7 +90,7 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 - Watched, skipped, new and flagged states
 - Embedded cover-art thumbnails
 
-### Customization
+## ✨ Customization
 
 - Material You support
 - Light, dark and system themes
@@ -72,9 +98,9 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 - Customizable navigation tabs
 - Per-video playback preferences
 - Smart orientation controls
-- Clean, modern Jetpack Compose UI
+- Modern Jetpack Compose UI
 
-### Performance
+## 🚀 Performance
 
 - Optimized playback for long viewing sessions
 - Reactive MPV state handling
@@ -83,28 +109,32 @@ mpvX is built around a simple idea: **give you a fast video player that feels li
 
 ---
 
-## Download
+## ⬇️ Download mpvX
 
-<p align="center">
-  <a href="https://github.com/noob76379-source/mpvX/releases">
-    <img src="https://img.shields.io/badge/Download-mpvX-blue?style=for-the-badge&logo=github" alt="Download mpvX" />
-  </a>
-</p>
+<div align="center">
 
-<p align="center"><i>Check Releases for the latest available APK.</i></p>
+<a href="https://github.com/noob76379-source/mpvX/releases">
+  <img src="https://img.shields.io/badge/GET%20MPVX-LATEST%20RELEASE-111827?style=for-the-badge&logo=github&logoColor=white" alt="Download the latest mpvX release" />
+</a>
 
----
+<br />
+<sub>Check Releases for the latest available APK.</sub>
 
-## Built With
-
-- **Kotlin**
-- **Jetpack Compose**
-- **Material 3**
-- **libmpv**
+</div>
 
 ---
 
-## Credits
+## 🧩 Built With
+
+<div align="center">
+
+**Kotlin** &nbsp;·&nbsp; **Jetpack Compose** &nbsp;·&nbsp; **Material 3** &nbsp;·&nbsp; **libmpv**
+
+</div>
+
+---
+
+## ❤️ Credits
 
 mpvX acknowledges the open-source projects that have influenced, supported, or contributed to its development:
 
@@ -119,8 +149,12 @@ See **[Third-Party Licenses & Attribution](THIRD_PARTY_LICENSES.md)** for the so
 
 ---
 
-## License
+## 📜 License
 
 The original mpvX code is distributed under the **[Apache License 2.0](LICENSE)**, subject to the separate licenses and attribution requirements of third-party components.
 
 **Third-party software is not relicensed as mpvX.** Copyright notices and applicable license terms remain with their respective authors and contributors.
+
+<div align="center">
+  <sub>Made with care for a better Android playback experience.</sub>
+</div>
