@@ -17,8 +17,6 @@
   <a href="https://github.com/noob76379-source/mpvX/releases"><strong>Download</strong></a>
   &nbsp;&nbsp;•&nbsp;&nbsp;
   <a href="https://github.com/noob76379-source/mpvX/releases">Releases</a>
-  &nbsp;&nbsp;•&nbsp;&nbsp;
-  <a href="THIRD_PARTY_LICENSES.md">Licenses & Attribution</a>
 </p>
 
 </div>
@@ -134,7 +132,8 @@ Under the hood, it combines the playback power of **libmpv** with a modern **Jet
 
 ---
 
-## ❤️ Credits
+<details>
+<summary><strong>Attribution & Licenses</strong></summary>
 
 mpvX acknowledges the open-source projects that have influenced, supported, or contributed to its development:
 
@@ -145,9 +144,9 @@ mpvX acknowledges the open-source projects that have influenced, supported, or c
 - [Next Player](https://github.com/anilbeesetti/nextplayer) — GPL-3.0
 - [Gramophone](https://github.com/FoedusProgramme/Gramophone) — GPL-3.0
 
-See **[Third-Party Licenses & Attribution](THIRD_PARTY_LICENSES.md)** for the source and license links.
+See **[Third-Party Licenses & Attribution](THIRD_PARTY_LICENSES.md)** for complete source and license information.
 
----
+</details>
 
 ## 📜 License
 
