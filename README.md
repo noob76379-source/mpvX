@@ -104,6 +104,7 @@ Under the hood, it combines the playback power of **libmpv** with a modern **Jet
 - Reactive MPV state handling
 - Smooth gesture interactions
 - Efficient background playback
+- Removed unnecessary options and optimized the app for a more battery-friendly experience
 
 ---
 
