@@ -131,7 +131,7 @@ class MPVView(
     // mediacodec-copy (HW) is omitted as it often causes Surface-related crashes on certain devices
     MPVLib.setOptionString(
       "hwdec",
-      if (decoderPreferences.tryHWDecoding.get()) "mediacodec-copy,mediacodec,no" else "no",
+      if (decoderPreferences.tryHWDecoding.get()) "mediacodec,mediacodec-copy,no" else "no",
     )
     MPVLib.setOptionString("hwdec-codecs", "all")
 
