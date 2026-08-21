@@ -17,8 +17,8 @@ android {
     applicationId = "xyz.mpv.rex"
     minSdk = 26
     targetSdk = 36
-    versionCode = 213
-    versionName = "4.5.3"
+    versionCode = 214
+    versionName = "4.5.4"
 
     vectorDrawables {
       useSupportLibrary = true
@@ -217,22 +217,3 @@ dependencies {
   implementation(libs.lazycolumnscrollbar)
   implementation(libs.reorderable)
   implementation(libs.compose.markdown)
-
-  // Unit Testing
-  testImplementation(libs.junit)
-  testImplementation(libs.mockk)
-  testImplementation(libs.kotlinx.coroutines.test)
-  testImplementation(libs.turbine)
-}
-
-/* ---------------- Git helpers ---------------- */
-
-fun getCommitCount(): String =
-  providers.exec {
-    commandLine("git", "rev-list", "--count", "HEAD")
-  }.standardOutput.asText.get().trim().ifEmpty { "0" }
-
-fun getCommitSha(): String =
-  providers.exec {
-    commandLine("git", "rev-parse", "--short", "HEAD")
-  }.standardOutput.asText.get().trim().ifEmpty { "unknown" }
