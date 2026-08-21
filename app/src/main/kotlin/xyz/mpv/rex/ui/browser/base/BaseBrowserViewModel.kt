@@ -14,6 +14,7 @@ import xyz.mpv.rex.utils.history.RecentlyPlayedOps
 import xyz.mpv.rex.utils.media.MediaLibraryEvents
 import xyz.mpv.rex.utils.permission.PermissionUtils.StorageOps
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,19 +22,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-import kotlinx.coroutines.FlowPreview
-
 /**
  * Base ViewModel for browser screens with shared functionality
  * handles common UI states and data management.
- * 
+ *
  * @param T The type of items displayed in the list
  */
 @OptIn(FlowPreview::class)
@@ -41,11 +42,11 @@ abstract class BaseBrowserViewModel<T>(
   application: Application,
 ) : AndroidViewModel(application),
   KoinComponent {
-  
+
   protected val metadataCache: VideoMetadataCacheRepository by inject()
   protected val uiPreferences: UiPreferences by inject()
   protected val playbackStateRepository: PlaybackStateRepository by inject()
-  
+
   // Common UI States
   val uiSettings: StateFlow<UiSettings> = uiPreferences.observeUiSettings()
     .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), uiPreferences.getUiSettings())
@@ -97,6 +98,29 @@ abstract class BaseBrowserViewModel<T>(
           loadData()
         }
     }
+
+    // Folder NEW/unwatched badges are derived from playback state, while the
+    // media scanner keeps a short-lived cache. Refresh only when a state change
+    // can actually affect those badges: a video is opened (timeRemaining leaves
+    // the NEW sentinel) or becomes watched. This avoids reloading on every
+    // playback-position database update.
+    viewModelScope.launch {
+      playbackStateRepository
+        .observeAllPlaybackStates()
+        .map { states ->
+          states
+            .asSequence()
+            .filter { it.timeRemaining != -1 || it.hasBeenWatched }
+            .map { it.mediaTitle to it.hasBeenWatched }
+            .toSet()
+        }
+        .distinctUntilChanged()
+        .drop(1)
+        .collectLatest {
+          MediaFileRepository.clearCache()
+          loadData()
+        }
+    }
   }
 
   /**
@@ -111,13 +135,13 @@ abstract class BaseBrowserViewModel<T>(
       if (!silent) {
         _isLoading.value = true
       }
-      
+
       // Clear core media scanner cache
       MediaFileRepository.clearCache()
-      
+
       // Delay to allow filesystem/MediaStore sync if needed
       delay(if (silent) 100 else 500)
-      
+
       loadData()
     }
   }
