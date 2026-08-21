@@ -10,6 +10,7 @@ import xyz.mpv.rex.database.repository.HybridMediaIndexRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext
+import java.io.File
 
 /**
  * Operations for mapping media files to high-level domain models like [VideoFolder].
@@ -45,27 +46,24 @@ object MediaMetadataOps {
                         (isAudioEnabled || folder.videoCount > 0) && folder.path !in blacklistedFolders
                     }
                     .map { folder ->
-                        // Folder NEW count must be based on the current watched state.
-                        // PlaybackStateEntity.mediaTitle is not guaranteed to be a full path,
-                        // so match the state against the folder using several stable forms.
-                        val watchedInFolder = playbackStates.count { state ->
-                            if (!state.hasBeenWatched) return@count false
-
+                        // The folder badge means "NEW/unopened", not strictly "watched".
+                        // A video can leave the NEW state as soon as it gets a playback state,
+                        // long before it reaches the watched threshold. Count persisted playback
+                        // states that can be matched to this folder and remove those from the
+                        // scanner-derived NEW count.
+                        val openedInFolder = playbackStates.count { state ->
                             val title = state.mediaTitle.trim()
                             if (title.isEmpty()) return@count false
 
-                            val file = java.io.File(title)
-                            val parent = file.parent?.trimEnd(java.io.File.separatorChar)
-                            val folderPath = folder.path.trimEnd(java.io.File.separatorChar)
+                            val folderPath = folder.path.trimEnd(File.separatorChar)
+                            val file = File(title)
+                            val parent = file.parent?.trimEnd(File.separatorChar)
                             val fileName = file.name
-                            val titleWithoutExtension = fileName.substringBeforeLast('.', fileName)
+                            val normalizedTitle = title.trimEnd(File.separatorChar)
 
                             parent == folderPath ||
-                                fileName.equals(title, ignoreCase = true) ||
-                                java.io.File(folderPath, fileName).exists() ||
-                                java.io.File(folderPath, title).exists() ||
-                                folder.name.equals(title, ignoreCase = true) ||
-                                folder.name.equals(titleWithoutExtension, ignoreCase = true)
+                                normalizedTitle.startsWith("$folderPath${File.separator}") ||
+                                File(folderPath, fileName).isFile
                         }
 
                         VideoFolder(
@@ -77,7 +75,7 @@ object MediaMetadataOps {
                             totalSize = folder.totalSize,
                             totalDuration = folder.totalDuration,
                             lastModified = folder.lastModified,
-                            newCount = (folder.newCount - watchedInFolder).coerceAtLeast(0),
+                            newCount = (folder.newCount - openedInFolder).coerceAtLeast(0),
                             unwatchedVideoCount = folder.unwatchedVideoCount
                         )
                     }
