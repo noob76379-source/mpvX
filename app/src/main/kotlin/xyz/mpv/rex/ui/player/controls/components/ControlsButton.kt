@@ -74,27 +74,30 @@ fun ControlsButton(
     else -> if (hideBackground) controlColor else MaterialTheme.colorScheme.onSurface
   }
 
-  val glassModifier = if (enableGlass && !hideBackground) {
-    Modifier.glassSurface(
-      shape = CircleShape,
-      backgroundColor = Color.White.copy(alpha = 0.05f),
-      borderColor = Color.White.copy(alpha = 0.15f),
-      borderWidth = 1.dp,
-      outerShadowColor = Color.Black.copy(alpha = 0.00f),
-      outerShadowBlur = 0.dp,
-      outerShadowOffsetX = 0.dp,
-      outerShadowOffsetY = 0.dp,
-      innerHighlightColor = Color.White.copy(alpha = 0.35f),
-      innerHighlightBlur = 5.dp,
-      innerHighlightOffsetX = (-2).dp,
-      innerHighlightOffsetY = (-2).dp,
-      innerShadowColor = Color.Black.copy(alpha = 0.35f),
-      innerShadowBlur = 5.dp,
-      innerShadowOffsetX = 2.dp,
-      innerShadowOffsetY = 2.dp
-    )
-  } else {
-    Modifier
+  val useGlass = enableGlass && !hideBackground
+  val glassModifier = remember(useGlass) {
+    if (useGlass) {
+      Modifier.glassSurface(
+        shape = CircleShape,
+        backgroundColor = Color.White.copy(alpha = 0.05f),
+        borderColor = Color.White.copy(alpha = 0.15f),
+        borderWidth = 1.dp,
+        outerShadowColor = Color.Black.copy(alpha = 0.00f),
+        outerShadowBlur = 0.dp,
+        outerShadowOffsetX = 0.dp,
+        outerShadowOffsetY = 0.dp,
+        innerHighlightColor = Color.White.copy(alpha = 0.35f),
+        innerHighlightBlur = 5.dp,
+        innerHighlightOffsetX = (-2).dp,
+        innerHighlightOffsetY = (-2).dp,
+        innerShadowColor = Color.Black.copy(alpha = 0.35f),
+        innerShadowBlur = 5.dp,
+        innerShadowOffsetX = 2.dp,
+        innerShadowOffsetY = 2.dp,
+      )
+    } else {
+      Modifier
+    }
   }
 
   Surface(

@@ -1,6 +1,8 @@
 package xyz.mpv.rex.ui.player.controls.components
 
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -18,6 +20,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +38,8 @@ import xyz.mpv.rex.preferences.AppearancePreferences
 import xyz.mpv.rex.preferences.preference.collectAsState
 import xyz.mpv.rex.ui.theme.spacing
 
+private const val PLAYER_UPDATE_ANIMATION_DURATION_MS = 120
+
 @Composable
 fun PlayerUpdate(
   modifier: Modifier = Modifier,
@@ -43,27 +48,31 @@ fun PlayerUpdate(
   val appearancePreferences = koinInject<AppearancePreferences>()
   val enableGlass by appearancePreferences.enableGlassPlayerControls.collectAsState()
 
-  val glassModifier = if (enableGlass) {
-    Modifier.glassSurface(
-      shape = RoundedCornerShape(100.dp),
-      backgroundColor = Color.White.copy(alpha = 0.05f),
-      borderColor = Color.White.copy(alpha = 0.15f),
-      borderWidth = 1.dp,
-      outerShadowColor = Color.Black.copy(alpha = 0.00f),
-      outerShadowBlur = 0.dp,
-      outerShadowOffsetX = 0.dp,
-      outerShadowOffsetY = 0.dp,
-      innerHighlightColor = Color.White.copy(alpha = 0.35f),
-      innerHighlightBlur = 5.dp,
-      innerHighlightOffsetX = (-2).dp,
-      innerHighlightOffsetY = (-2).dp,
-      innerShadowColor = Color.Black.copy(alpha = 0.35f),
-      innerShadowBlur = 5.dp,
-      innerShadowOffsetX = 2.dp,
-      innerShadowOffsetY = 2.dp
-    )
-  } else {
-    Modifier
+  // Keep the visual glass effect stable between content updates. The modifier is rebuilt only
+  // when the glass preference changes instead of being recreated for every update message.
+  val glassModifier = remember(enableGlass) {
+    if (enableGlass) {
+      Modifier.glassSurface(
+        shape = RoundedCornerShape(100.dp),
+        backgroundColor = Color.White.copy(alpha = 0.05f),
+        borderColor = Color.White.copy(alpha = 0.15f),
+        borderWidth = 1.dp,
+        outerShadowColor = Color.Black.copy(alpha = 0.00f),
+        outerShadowBlur = 0.dp,
+        outerShadowOffsetX = 0.dp,
+        outerShadowOffsetY = 0.dp,
+        innerHighlightColor = Color.White.copy(alpha = 0.35f),
+        innerHighlightBlur = 5.dp,
+        innerHighlightOffsetX = (-2).dp,
+        innerHighlightOffsetY = (-2).dp,
+        innerShadowColor = Color.Black.copy(alpha = 0.35f),
+        innerShadowBlur = 5.dp,
+        innerShadowOffsetX = 2.dp,
+        innerShadowOffsetY = 2.dp,
+      )
+    } else {
+      Modifier
+    }
   }
 
   Surface(
@@ -78,7 +87,14 @@ fun PlayerUpdate(
     ),
     modifier = modifier
       .then(glassModifier)
-      .animateContentSize(),
+      // Player updates can change rapidly while seeking. Keep the size transition short so
+      // consecutive updates do not leave long-running animations on the render thread.
+      .animateContentSize(
+        animationSpec = tween(
+          durationMillis = PLAYER_UPDATE_ANIMATION_DURATION_MS,
+          easing = FastOutSlowInEasing,
+        ),
+      ),
   ) {
     Box(
       modifier = Modifier.padding(
@@ -91,7 +107,6 @@ fun PlayerUpdate(
     }
   }
 }
-
 
 @Composable
 fun TextPlayerUpdate(
@@ -119,14 +134,14 @@ fun LockHint(
     shape = RoundedCornerShape(8.dp),
     color = Color.Black.copy(alpha = 0.6f),
     contentColor = Color.White,
-    modifier = modifier
+    modifier = modifier,
   ) {
     Text(
       text = text,
       modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
       style = MaterialTheme.typography.labelLarge,
       fontWeight = FontWeight.Bold,
-      color = Color.White
+      color = Color.White,
     )
   }
 }
@@ -144,6 +159,7 @@ fun MultipleSpeedPlayerUpdate(
 private fun PreviewMultipleSpeedPlayerUpdate() {
   MultipleSpeedPlayerUpdate(currentSpeed = 2f)
 }
+
 @Composable
 fun SeekPlayerUpdate(
   currentTime: String,
