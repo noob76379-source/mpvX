@@ -22,7 +22,7 @@ import kotlinx.coroutines.withContext
 import java.io.File
 
 /**
- * Centralized manager for all history-related operations, including recently played 
+ * Centralized manager for all history-related operations, including recently played
  * tracking.
  */
 class HistoryManager(
@@ -45,15 +45,39 @@ class HistoryManager(
         launchSource: String,
         playlistId: Int? = null
     ) {
-        if (!advancedPreferences.enableRecentlyPlayed.get()) return
-
         scope.launch(Dispatchers.IO) {
             runCatching {
+                // The folder NEW badge is based on PlaybackStateEntity.mediaTitle matching the
+                // media index location. Mark the indexed item as opened immediately, independently
+                // of the Recently Played preference, so opening a video removes it from NEW.
                 val filePath = resolveFilePath(uri)
+                val existingState = playbackStateRepository.getVideoDataByTitle(filePath)
+                when {
+                    existingState == null -> playbackStateRepository.upsert(
+                        PlaybackStateEntity(
+                            mediaTitle = filePath,
+                            lastPosition = 0,
+                            playbackSpeed = 1.0,
+                            sid = -1,
+                            subDelay = 0,
+                            subSpeed = 1.0,
+                            aid = -1,
+                            audioDelay = 0,
+                            timeRemaining = 0,
+                            hasBeenWatched = false,
+                        )
+                    )
+                    existingState.timeRemaining == -1 -> playbackStateRepository.upsert(
+                        existingState.copy(timeRemaining = 0)
+                    )
+                }
+
+                if (!advancedPreferences.enableRecentlyPlayed.get()) return@runCatching
+
                 Log.d(TAG, "recordPlaybackStart: uri=$uri, resolvedPath=$filePath, source=$launchSource")
                 if (shouldSkipHistory(filePath)) {
                     Log.d(TAG, "recordPlaybackStart: skipping history for $filePath")
-                    return@launch
+                    return@runCatching
                 }
 
                 val videoTitle = MPVLib.getPropertyString("media-title")?.takeIf { it != fileName }
@@ -61,7 +85,7 @@ class HistoryManager(
                 val fileSize = getMPVFileSize()
                 val (width, height) = getMPVResolution()
                 val (artist, album) = getMPVMetadata()
-                
+
                 // Use extension first, then height
                 val isAudio = xyz.mpv.rex.utils.storage.FileTypeUtils.isAudioFile(File(filePath)) || (height <= 0)
 
@@ -348,9 +372,9 @@ class HistoryManager(
     // ==================== Private Helpers ====================
 
     private fun shouldSkipHistory(path: String): Boolean {
-        if (path.startsWith("smb://") || path.startsWith("ftp://") || 
+        if (path.startsWith("smb://") || path.startsWith("ftp://") ||
             path.startsWith("ftps://") || path.startsWith("webdav://")) return true
-            
+
         val uri = runCatching { Uri.parse(path) }.getOrNull() ?: return false
         if (uri.host?.lowercase() in listOf("127.0.0.1", "localhost", "0.0.0.0")) return true
         return false
@@ -388,7 +412,7 @@ class HistoryManager(
     }
 
     private fun getMPVMetadata(): Pair<String, String> {
-        val artist = MPVLib.getPropertyString("metadata/by-key/performer") ?: 
+        val artist = MPVLib.getPropertyString("metadata/by-key/performer") ?:
                      MPVLib.getPropertyString("metadata/by-key/artist") ?: ""
         val album = MPVLib.getPropertyString("metadata/by-key/album") ?: ""
         return Pair(artist, album)
