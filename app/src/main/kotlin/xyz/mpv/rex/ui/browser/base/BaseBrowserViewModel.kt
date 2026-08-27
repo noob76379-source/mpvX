@@ -99,19 +99,20 @@ abstract class BaseBrowserViewModel<T>(
         }
     }
 
-    // Folder NEW/unwatched badges are derived from playback state, while the
-    // media scanner keeps a short-lived cache. Refresh only when a state change
-    // can actually affect those badges: a video is opened (timeRemaining leaves
-    // the NEW sentinel) or becomes watched. This avoids reloading on every
-    // playback-position database update.
+    // Folder NEW/unwatched badges are derived from playback state. Observe the
+    // state transitions that affect those badges and reload when a video moves
+    // from the NEW sentinel (-1) to an opened state, or when its watched state
+    // changes. The previous projection kept only the media title and watched
+    // flag, so a timeRemaining-only transition was ignored by distinctUntilChanged.
     viewModelScope.launch {
       playbackStateRepository
         .observeAllPlaybackStates()
         .map { states ->
           states
             .asSequence()
-            .filter { it.timeRemaining != -1 || it.hasBeenWatched }
-            .map { it.mediaTitle to it.hasBeenWatched }
+            .map { state ->
+              state.mediaTitle to (state.timeRemaining != -1 || state.hasBeenWatched)
+            }
             .toSet()
         }
         .distinctUntilChanged()
