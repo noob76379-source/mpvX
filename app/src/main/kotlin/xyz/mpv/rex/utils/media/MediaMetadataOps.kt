@@ -2,15 +2,15 @@ package xyz.mpv.rex.utils.media
 
 import android.content.Context
 import android.util.Log
+import xyz.mpv.rex.database.repository.HybridMediaIndexRepository
 import xyz.mpv.rex.domain.media.model.VideoFolder
 import xyz.mpv.rex.domain.playbackstate.repository.PlaybackStateRepository
 import xyz.mpv.rex.preferences.AppearancePreferences
 import xyz.mpv.rex.preferences.BrowserPreferences
-import xyz.mpv.rex.database.repository.HybridMediaIndexRepository
+import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext
-import java.io.File
 
 /**
  * Operations for mapping media files to high-level domain models like [VideoFolder].
@@ -28,6 +28,10 @@ object MediaMetadataOps {
 
                 val isAudioEnabled = browserPreferences.showAudioFiles.get()
                 val playbackStates = playbackStateRepository.getAllPlaybackStates()
+                val openedMedia = playbackStates
+                    .map { it.mediaTitle.trim() }
+                    .filter { it.isNotEmpty() }
+                    .toHashSet()
                 val thresholdDays = appearancePreferences.unplayedOldVideoDays.get()
                 val recentThresholdMillis = thresholdDays * 24L * 60L * 60L * 1000L
                 val now = System.currentTimeMillis()
@@ -48,23 +52,23 @@ object MediaMetadataOps {
                         (isAudioEnabled || folder.videoCount > 0) && folder.path !in blacklistedFolders
                     }
                     .map { folder ->
-                        // The index provides the base recently-added count. Playback state in mpvX
-                        // can use a path representation different from the index identity, so match
-                        // opened videos by normalized file path and only subtract videos that are
-                        // still inside the same recent window. This keeps the initial count intact
-                        // while making it decrease after a recently added video is opened.
-                        val folderPath = folder.path.trimEnd(File.separatorChar)
-                        val openedRecentVideos = playbackStates.asSequence()
-                            .mapNotNull { state -> state.mediaTitle.takeIf { it.isNotBlank() } }
-                            .map { File(it) }
-                            .filter { file ->
-                                val parent = file.parent?.trimEnd(File.separatorChar)
-                                parent == folderPath && file.exists() &&
-                                    now - file.lastModified() <= recentThresholdMillis
+                        // Calculate the badge from the actual videos in this folder so playback
+                        // state is matched using the same identifiers the player can persist.
+                        val newCount = hybridIndex.getVideosInFolder(folder.id)
+                            .asSequence()
+                            .filter { video -> !video.isAudio }
+                            .filter { video -> now - video.dateModified in 0..recentThresholdMillis }
+                            .count { video ->
+                                val file = File(video.path)
+                                val identifiers = setOf(
+                                    video.title,
+                                    video.path,
+                                    video.uri.toString(),
+                                    file.absolutePath,
+                                    file.name,
+                                ).map { it.trim() }
+                                identifiers.none { it in openedMedia }
                             }
-                            .map { it.absolutePath }
-                            .distinct()
-                            .count()
 
                         VideoFolder(
                             bucketId = folder.id,
@@ -75,8 +79,8 @@ object MediaMetadataOps {
                             totalSize = folder.totalSize,
                             totalDuration = folder.totalDuration,
                             lastModified = folder.lastModified,
-                            newCount = (folder.newCount - openedRecentVideos).coerceAtLeast(0),
-                            unwatchedVideoCount = folder.unwatchedVideoCount
+                            newCount = newCount,
+                            unwatchedVideoCount = folder.unwatchedVideoCount,
                         )
                     }
             } catch (e: Exception) {
