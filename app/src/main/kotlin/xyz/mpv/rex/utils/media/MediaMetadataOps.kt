@@ -7,7 +7,6 @@ import xyz.mpv.rex.domain.media.model.VideoFolder
 import xyz.mpv.rex.domain.playbackstate.repository.PlaybackStateRepository
 import xyz.mpv.rex.preferences.AppearancePreferences
 import xyz.mpv.rex.preferences.BrowserPreferences
-import java.io.File
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.context.GlobalContext
@@ -28,13 +27,7 @@ object MediaMetadataOps {
 
                 val isAudioEnabled = browserPreferences.showAudioFiles.get()
                 val playbackStates = playbackStateRepository.getAllPlaybackStates()
-                val openedMedia = playbackStates
-                    .map { it.mediaTitle.trim() }
-                    .filter { it.isNotEmpty() }
-                    .toHashSet()
                 val thresholdDays = appearancePreferences.unplayedOldVideoDays.get()
-                val recentThresholdMillis = thresholdDays * 24L * 60L * 60L * 1000L
-                val now = System.currentTimeMillis()
 
                 val foldersPreferences = koin.get<xyz.mpv.rex.preferences.FoldersPreferences>()
                 val blacklistedFolders = foldersPreferences.blacklistedFolders.get()
@@ -52,24 +45,6 @@ object MediaMetadataOps {
                         (isAudioEnabled || folder.videoCount > 0) && folder.path !in blacklistedFolders
                     }
                     .map { folder ->
-                        // Calculate the badge from the actual videos in this folder so playback
-                        // state is matched using the same identifiers the player can persist.
-                        val newCount = hybridIndex.getVideosInFolder(folder.id)
-                            .asSequence()
-                            .filter { video -> !video.isAudio }
-                            .filter { video -> now - video.dateModified in 0..recentThresholdMillis }
-                            .count { video ->
-                                val file = File(video.path)
-                                val identifiers = setOf(
-                                    video.title,
-                                    video.path,
-                                    video.uri.toString(),
-                                    file.absolutePath,
-                                    file.name,
-                                ).map { it.trim() }
-                                identifiers.none { it in openedMedia }
-                            }
-
                         VideoFolder(
                             bucketId = folder.id,
                             name = folder.name,
@@ -79,7 +54,7 @@ object MediaMetadataOps {
                             totalSize = folder.totalSize,
                             totalDuration = folder.totalDuration,
                             lastModified = folder.lastModified,
-                            newCount = newCount,
+                            newCount = folder.newCount,
                             unwatchedVideoCount = folder.unwatchedVideoCount,
                         )
                     }
